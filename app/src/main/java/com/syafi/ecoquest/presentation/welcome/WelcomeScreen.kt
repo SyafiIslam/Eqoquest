@@ -75,27 +75,34 @@ fun WelcomeScreen(
                 }
             }
         }
-        HorizontalPager(
-            state = pagerState,
-            verticalAlignment = Alignment.Top,
-            modifier = Modifier.weight(10f)
-        ) { index ->
-            Screen(
-                welcomePages = welcomePageList[index],
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .weight(10f),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            HorizontalPager(
+                state = pagerState,
+                verticalAlignment = Alignment.Top,
+            ) { index ->
+                Screen(
+                    welcomePages = welcomePageList[index],
+                    pagerState = pagerState,
+                    scope = scope,
+                    navController = navController,
+                    viewModel
+                )
+            }
+            HorizontalPagerIndicator(
                 pagerState = pagerState,
-                scope = scope,
-                navController = navController,
-                viewModel
+                activeColor = MaterialTheme.colors.green,
+                inactiveColor = MaterialTheme.colors.grey,
+                indicatorWidth = 40.dp,
+                indicatorHeight = 10.dp,
+                spacing = 10.dp,
             )
         }
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
-            activeColor = MaterialTheme.colors.green,
-            inactiveColor = MaterialTheme.colors.grey,
-            indicatorWidth = 40.dp,
-            indicatorHeight = 10.dp,
-            spacing = 10.dp,
-        )
         Spacer(modifier = Modifier.height(15.dp))
         Button(
             onClick = {
@@ -114,7 +121,6 @@ fun WelcomeScreen(
             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.dark),
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
         ) {
             Text(
                 text = welcomePageList[pagerState.currentPage].btnText,
