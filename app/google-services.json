@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "298472649703",
+    "project_id": "ecoquest-3c6f0",
+    "storage_bucket": "ecoquest-3c6f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298472649703:android:55942f6bbddbbc18218342",
+        "android_client_info": {
+          "package_name": "com.syafi.ecoquest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298472649703-6ggi44v1n6oph15he9q94ktd6bvekerb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeAqCVDPLoOeSn8iyMjjiDEATWWXMFExg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298472649703-6ggi44v1n6oph15he9q94ktd6bvekerb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
