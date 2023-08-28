@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun WelcomeScreen(
     navController: NavController,
-    viewModel: HomeScreenViewModel= hiltViewModel()
+    viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
 
     val welcomePageList = listOf<WelcomePages>(
@@ -46,35 +46,11 @@ fun WelcomeScreen(
     val pagerState = rememberPagerState(pageCount = welcomePageList.size)
     val scope = rememberCoroutineScope()
 
-    Column(Modifier.fillMaxSize()) {
-        HorizontalPager(
-            state = pagerState,
-            verticalAlignment = Alignment.Top
-        ) { index ->
-            Screen(
-                welcomePages = welcomePageList[index],
-                pagerState = pagerState,
-                scope = scope,
-                navController = navController,
-                viewModel
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-fun Screen(
-    welcomePages: WelcomePages,
-    pagerState: PagerState,
-    scope: CoroutineScope,
-    navController: NavController,
-    viewModel: HomeScreenViewModel
-) {
     Column(
         Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AnimatedVisibility(
             modifier = Modifier.fillMaxWidth(),
@@ -97,11 +73,74 @@ fun Screen(
                 }
             }
         }
+        HorizontalPager(
+            state = pagerState,
+            verticalAlignment = Alignment.Top,
+            modifier = Modifier.weight(10f)
+        ) { index ->
+            Screen(
+                welcomePages = welcomePageList[index],
+                pagerState = pagerState,
+                scope = scope,
+                navController = navController,
+                viewModel
+            )
+        }
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            activeColor = MaterialTheme.colors.green,
+            inactiveColor = MaterialTheme.colors.grey,
+            indicatorWidth = 40.dp,
+            indicatorHeight = 10.dp,
+            spacing = 10.dp,
+            modifier = Modifier.weight(1f)
+        )
+        Spacer(modifier = Modifier.height(15.dp))
+        Button(
+            onClick = {
+                if (pagerState.currentPage == 2) {
+                    viewModel.saveOnBoardingState(true)
+                    navController.popBackStack()
+                    navController.navigate(Routes.HOME)
+                } else {
+                    scope.launch {
+                        pagerState.animateScrollToPage(
+                            pagerState.currentPage + 1
+                        )
+                    }
+                }
+            },
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.dark),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = welcomePageList[pagerState.currentPage].btnText,
+                style = MaterialTheme.typography.subtitle1,
+                color = Color.White
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun Screen(
+    welcomePages: WelcomePages,
+    pagerState: PagerState,
+    scope: CoroutineScope,
+    navController: NavController,
+    viewModel: HomeScreenViewModel
+
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
         Column(
             Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .weight(10f),
+//                .fillMaxWidth()
+                .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -127,39 +166,7 @@ fun Screen(
                     }
                 },
                 style = MaterialTheme.typography.h5,
-                textAlign = TextAlign.Center
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            HorizontalPagerIndicator(
-                pagerState = pagerState,
-                activeColor = MaterialTheme.colors.green,
-                inactiveColor = MaterialTheme.colors.grey,
-                indicatorWidth = 40.dp,
-                indicatorHeight = 10.dp,
-                spacing = 10.dp
-            )
-        }
-        Button(
-            onClick = {
-                if (pagerState.currentPage == 2) {
-                    viewModel.saveOnBoardingState(true)
-                    navController.popBackStack()
-                    navController.navigate(Routes.HOME)
-                } else {
-                    scope.launch {
-                        pagerState.animateScrollToPage(
-                            pagerState.currentPage + 1
-                        )
-                    }
-                }
-            },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.dark),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(
-                text = welcomePages.btnText,
-                style = MaterialTheme.typography.subtitle1,
-                color = Color.White
+                textAlign = TextAlign.Center,
             )
         }
     }
