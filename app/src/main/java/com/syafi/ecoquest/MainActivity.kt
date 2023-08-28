@@ -42,8 +42,8 @@ fun Greeting(name: String) {
         style = MaterialTheme.typography.h1,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(6.dp)
-            .background(MaterialTheme.colors.sage)
+            .padding(6.dp),
+        color = MaterialTheme.colors.sage
     )
 }
 
