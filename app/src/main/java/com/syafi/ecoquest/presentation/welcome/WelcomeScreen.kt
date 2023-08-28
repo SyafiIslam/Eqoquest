@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun WelcomeScreen(
     navController: NavController,
-    viewModel: HomeScreenViewModel= hiltViewModel()
+    viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
 
     val welcomePageList = listOf<WelcomePages>(
@@ -46,10 +46,39 @@ fun WelcomeScreen(
     val pagerState = rememberPagerState(pageCount = welcomePageList.size)
     val scope = rememberCoroutineScope()
 
-    Column(Modifier.fillMaxSize()) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(Modifier.fillMaxWidth()) {
+            AnimatedVisibility(
+                modifier = Modifier.fillMaxWidth(),
+                visible = pagerState.currentPage != 2,
+            ) {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    OutlinedButton(
+                        onClick = {
+                            viewModel.saveOnBoardingState(true)
+                            navController.popBackStack()
+                            navController.navigate(Routes.HOME)
+                        },
+                        border = BorderStroke(1.dp, MaterialTheme.colors.dark)
+                    ) {
+                        Text(
+                            text = "Lewati",
+                            color = MaterialTheme.colors.dark,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                    }
+                }
+            }
+        }
         HorizontalPager(
             state = pagerState,
-            verticalAlignment = Alignment.Top
+            verticalAlignment = Alignment.Top,
+            modifier = Modifier.weight(10f)
         ) { index ->
             Screen(
                 welcomePages = welcomePageList[index],
@@ -57,6 +86,40 @@ fun WelcomeScreen(
                 scope = scope,
                 navController = navController,
                 viewModel
+            )
+        }
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            activeColor = MaterialTheme.colors.green,
+            inactiveColor = MaterialTheme.colors.grey,
+            indicatorWidth = 40.dp,
+            indicatorHeight = 10.dp,
+            spacing = 10.dp,
+        )
+        Spacer(modifier = Modifier.height(15.dp))
+        Button(
+            onClick = {
+                if (pagerState.currentPage == 2) {
+                    viewModel.saveOnBoardingState(true)
+                    navController.popBackStack()
+                    navController.navigate(Routes.HOME)
+                } else {
+                    scope.launch {
+                        pagerState.animateScrollToPage(
+                            pagerState.currentPage + 1
+                        )
+                    }
+                }
+            },
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.dark),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            Text(
+                text = welcomePageList[pagerState.currentPage].btnText,
+                style = MaterialTheme.typography.subtitle1,
+                color = Color.White
             )
         }
     }
@@ -70,38 +133,19 @@ fun Screen(
     scope: CoroutineScope,
     navController: NavController,
     viewModel: HomeScreenViewModel
+
 ) {
     Column(
         Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AnimatedVisibility(
-            modifier = Modifier.fillMaxWidth(),
-            visible = pagerState.currentPage != 2,
-        ) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                OutlinedButton(
-                    onClick = {
-                        viewModel.saveOnBoardingState(true)
-                        navController.popBackStack()
-                        navController.navigate(Routes.HOME)
-                    },
-                    border = BorderStroke(1.dp, MaterialTheme.colors.dark)
-                ) {
-                    Text(
-                        text = "Lewati",
-                        color = MaterialTheme.colors.dark,
-                        style = MaterialTheme.typography.subtitle1
-                    )
-                }
-            }
-        }
         Column(
             Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .weight(10f),
+//                .fillMaxWidth()
+                .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -127,39 +171,7 @@ fun Screen(
                     }
                 },
                 style = MaterialTheme.typography.h5,
-                textAlign = TextAlign.Center
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            HorizontalPagerIndicator(
-                pagerState = pagerState,
-                activeColor = MaterialTheme.colors.green,
-                inactiveColor = MaterialTheme.colors.grey,
-                indicatorWidth = 40.dp,
-                indicatorHeight = 10.dp,
-                spacing = 10.dp
-            )
-        }
-        Button(
-            onClick = {
-                if (pagerState.currentPage == 2) {
-                    viewModel.saveOnBoardingState(true)
-                    navController.popBackStack()
-                    navController.navigate(Routes.HOME)
-                } else {
-                    scope.launch {
-                        pagerState.animateScrollToPage(
-                            pagerState.currentPage + 1
-                        )
-                    }
-                }
-            },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.dark),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(
-                text = welcomePages.btnText,
-                style = MaterialTheme.typography.subtitle1,
-                color = Color.White
+                textAlign = TextAlign.Center,
             )
         }
     }
