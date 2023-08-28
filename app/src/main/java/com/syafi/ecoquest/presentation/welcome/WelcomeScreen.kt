@@ -52,24 +52,26 @@ fun WelcomeScreen(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AnimatedVisibility(
-            modifier = Modifier.fillMaxWidth(),
-            visible = pagerState.currentPage != 2,
-        ) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                OutlinedButton(
-                    onClick = {
-                        viewModel.saveOnBoardingState(true)
-                        navController.popBackStack()
-                        navController.navigate(Routes.HOME)
-                    },
-                    border = BorderStroke(1.dp, MaterialTheme.colors.dark)
-                ) {
-                    Text(
-                        text = "Lewati",
-                        color = MaterialTheme.colors.dark,
-                        style = MaterialTheme.typography.subtitle1
-                    )
+        Row(Modifier.fillMaxWidth()) {
+            AnimatedVisibility(
+                modifier = Modifier.fillMaxWidth(),
+                visible = pagerState.currentPage != 2,
+            ) {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    OutlinedButton(
+                        onClick = {
+                            viewModel.saveOnBoardingState(true)
+                            navController.popBackStack()
+                            navController.navigate(Routes.HOME)
+                        },
+                        border = BorderStroke(1.dp, MaterialTheme.colors.dark)
+                    ) {
+                        Text(
+                            text = "Lewati",
+                            color = MaterialTheme.colors.dark,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                    }
                 }
             }
         }
@@ -93,7 +95,6 @@ fun WelcomeScreen(
             indicatorWidth = 40.dp,
             indicatorHeight = 10.dp,
             spacing = 10.dp,
-            modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.height(15.dp))
         Button(
@@ -111,7 +112,9 @@ fun WelcomeScreen(
                 }
             },
             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.dark),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
         ) {
             Text(
                 text = welcomePageList[pagerState.currentPage].btnText,
@@ -135,7 +138,9 @@ fun Screen(
     Column(
         Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
             Modifier
