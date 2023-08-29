@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.syafi.ecoquest.R
 import com.syafi.ecoquest.ui.theme.sage
 import com.syafi.ecoquest.util.Routes
@@ -41,19 +42,19 @@ fun SplashScreen(navController: NavController, afterSplashDestination: String= R
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Image(
-                painter = painterResource(id = R.drawable.icon_logo),
+            AsyncImage(
+                model = R.drawable.icon_logo,
                 contentDescription = "logo",
                 Modifier
                     .size(100.dp)
-                    .alpha(alphaAnim.value)
+                    .alpha(alphaAnim.value),
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Image(
-                painter = painterResource(id = R.drawable.logo),
+            AsyncImage(
+                model = R.drawable.logo,
                 contentDescription = "logo",
                 Modifier
-                    .alpha(alphaAnim.value)
+                    .alpha(alphaAnim.value).size(width = 300.dp, height = 75.dp),
             )
         }
     }
