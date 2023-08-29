@@ -19,6 +19,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.Coil
+import coil.compose.AsyncImage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -26,6 +28,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.ui.theme.grey
 import com.google.accompanist.pager.PagerState
+import com.syafi.ecoquest.R
 import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.util.Routes
 import kotlinx.coroutines.CoroutineScope
@@ -52,12 +55,20 @@ fun WelcomeScreen(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(Modifier.fillMaxWidth()) {
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            AsyncImage(
+                model = R.drawable.logo,
+                contentDescription = "",
+                modifier = Modifier.size(width = 100.dp, height = 25.dp)
+            )
             AnimatedVisibility(
-                modifier = Modifier.fillMaxWidth(),
                 visible = pagerState.currentPage != 2,
             ) {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                Row() {
                     OutlinedButton(
                         onClick = {
                             viewModel.saveOnBoardingState(true)
@@ -89,9 +100,6 @@ fun WelcomeScreen(
                 Screen(
                     welcomePages = welcomePageList[index],
                     pagerState = pagerState,
-                    scope = scope,
-                    navController = navController,
-                    viewModel
                 )
             }
             HorizontalPagerIndicator(
@@ -136,11 +144,8 @@ fun WelcomeScreen(
 fun Screen(
     welcomePages: WelcomePages,
     pagerState: PagerState,
-    scope: CoroutineScope,
-    navController: NavController,
-    viewModel: HomeScreenViewModel
 
-) {
+    ) {
     Column(
         Modifier
             .fillMaxWidth()
@@ -150,35 +155,31 @@ fun Screen(
     ) {
         Column(
             Modifier
-//                .fillMaxWidth()
+                .fillMaxWidth()
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = painterResource(id = welcomePages.image),
+
+            AsyncImage(
+                model = welcomePages.image,
                 contentDescription = null,
                 modifier = Modifier.size(240.dp)
 
             )
             Spacer(modifier = Modifier.height(30.dp))
             Text(
-                text = buildAnnotatedString {
-                    append(welcomePages.title)
-                    if (pagerState.currentPage == 0) {
-                        withStyle(
-                            style = SpanStyle(
-                                color = MaterialTheme.colors.green,
-                                fontWeight = FontWeight.Medium
-                            ),
-                        ) {
-                            append("EcoQuest")
-                        }
-                    }
-                },
+                text = welcomePages.title,
                 style = MaterialTheme.typography.h5,
                 textAlign = TextAlign.Center,
             )
+            if (pagerState.currentPage == 0) {
+                Text(
+                    text = "EcoQuest",
+                    style = MaterialTheme.typography.h5,
+                    color = MaterialTheme.colors.green
+                )
+            }
         }
     }
 }
