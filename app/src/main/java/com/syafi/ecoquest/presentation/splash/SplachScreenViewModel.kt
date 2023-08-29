@@ -21,7 +21,7 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             repository.readOnBoardingState().collect { completed ->
                 if (completed) {
-                    _startDestination = Routes.HOME
+                    _startDestination = Routes.LOGIN
                 } else {
                     _startDestination = Routes.WELCOME
                 }
