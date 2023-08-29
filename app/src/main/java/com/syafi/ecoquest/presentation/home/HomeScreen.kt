@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -67,14 +68,13 @@ fun HomeScreen() {
         
         Spacer(modifier = Modifier.height(20.dp))
 
-        Box(
+        Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .shadow(2.dp, RoundedCornerShape(15.dp))
-                .padding(20.dp)
+                .fillMaxWidth(),
+            elevation = 6.dp
         ) {
             Row(
+                Modifier.padding(20.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(
