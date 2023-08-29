@@ -12,7 +12,7 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun Navigation(navController: NavHostController, afterSplashDestination: String) {
-    NavHost(navController = navController, startDestination = Routes.LOGIN) {
+    NavHost(navController = navController, startDestination = Routes.HOME) {
         composable(Routes.SPLASH) {
             SplashScreen(navController = navController, afterSplashDestination)
         }
@@ -20,7 +20,7 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
             WelcomeScreen(navController = navController)
         }
         composable(Routes.HOME) {
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
         composable(Routes.LOGIN) {
             LoginScreen()
