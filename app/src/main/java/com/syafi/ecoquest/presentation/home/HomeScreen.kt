@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.syafi.ecoquest.R
@@ -72,22 +74,44 @@ fun HomeScreen() {
                 .shadow(2.dp, RoundedCornerShape(15.dp))
                 .padding(20.dp)
         ) {
-            Row {
-                Box(
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(CircleShape)
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.profile_picture),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .size(80.dp)
+                            .width(20.dp),
+                        color = MaterialTheme.colors.green,
+                        progress = 0.5f,
+                        strokeWidth = 5.dp
+                    )
+                    Text(
+                        text = "150 exp",
+                        style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.green,
                     )
                 }
+
+                Spacer(modifier = Modifier.width(25.dp))
+
+//                Box(
+//                    modifier = Modifier
+//                        .size(100.dp)
+//                        .clip(CircleShape)
+//                ) {
+//                    Image(
+//                        painter = painterResource(id = R.drawable.profile_picture),
+//                        contentDescription = null,
+//                        contentScale = ContentScale.Crop,
+//                        modifier = Modifier.fillMaxSize()
+//                    )
+//                }
                 Column {
                     Text(
-                        text = "Hebat",
+                        text = "Hebat!",
                         style = MaterialTheme.typography.body1,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -101,7 +125,7 @@ fun HomeScreen() {
                         text = "5 misi",
                         style = MaterialTheme.typography.h5,
                         color = MaterialTheme.colors.green,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }
