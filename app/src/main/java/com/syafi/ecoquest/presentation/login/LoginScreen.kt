@@ -1,8 +1,7 @@
 package com.syafi.ecoquest.presentation.login
 
-import androidx.compose.foundation.clickable
 import android.util.Log
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -51,7 +50,6 @@ fun LoginScreen(navController: NavController) {
         onTokenIdReceived = { token ->
             authenticated.value= true
             Log.d("infoToken", token)
-
         },
         onDialogDismissed = { msg ->
             Log.d("dismissed", msg)
@@ -97,6 +95,7 @@ fun LoginScreen(navController: NavController) {
         CustomButton(
             text = "Masuk",
             onClick = {
+                navController.popBackStack()
                 navController.navigate(Routes.HOME)
             }
         )
@@ -106,9 +105,7 @@ fun LoginScreen(navController: NavController) {
             color = Color.White,
             textColor = Color.Black,
             icon = R.drawable.google_icon,
-            onClick = {
-                oneTapSignInState.open()
-            },
+            onClick = { oneTapSignInState.open() },
             enabled = !oneTapSignInState.opened
         )
         Spacer(modifier = Modifier.height(25.dp))
@@ -135,3 +132,9 @@ fun LoginScreen(navController: NavController) {
         }
     }
 }
+
+//@Preview(showBackground = true)
+//@Composable
+//fun ShowLoginScreen() {
+//    LoginScreen()
+//}
