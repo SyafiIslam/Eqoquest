@@ -27,7 +27,7 @@ fun CustomButton(
         onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(backgroundColor = color),
         modifier = Modifier.fillMaxWidth(),
-        enabled = enabled
+        enabled = enabled,
     ) {
         Row(Modifier.padding(vertical = 6.dp)) {
             icon?.let {

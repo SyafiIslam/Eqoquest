@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.stevdzasan.onetap.OneTapSignInWithGoogle
 import com.stevdzasan.onetap.rememberOneTapSignInState
@@ -20,9 +21,10 @@ import com.syafi.ecoquest.R
 import com.syafi.ecoquest.presentation.component.CustomButton
 import com.syafi.ecoquest.presentation.component.CustomTextField
 import com.syafi.ecoquest.ui.theme.dark
+import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
 
     var email by remember {
         mutableStateOf("")
@@ -47,7 +49,7 @@ fun LoginScreen() {
         onTokenIdReceived = { token ->
             authenticated.value= true
             Log.d("infoToken", token)
-git
+
         },
         onDialogDismissed = { msg ->
             Log.d("dismissed", msg)
@@ -90,7 +92,7 @@ git
             onPasswordToggle = { showPassword = it }
         )
         Spacer(modifier = Modifier.height(15.dp))
-        CustomButton(text = "Masuk")
+        CustomButton(text = "Masuk", onClick = {navController.navigate(Routes.HOME)})
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
             text = "Google",
@@ -103,10 +105,4 @@ git
             enabled = !oneTapSignInState.opened
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShowLoginScreen() {
-    LoginScreen()
 }
