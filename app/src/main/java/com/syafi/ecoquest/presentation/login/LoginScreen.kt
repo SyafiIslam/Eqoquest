@@ -1,5 +1,6 @@
 package com.syafi.ecoquest.presentation.login
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -14,6 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.stevdzasan.onetap.OneTapSignInWithGoogle
+import com.stevdzasan.onetap.rememberOneTapSignInState
 import com.syafi.ecoquest.R
 import com.syafi.ecoquest.presentation.component.CustomButton
 import com.syafi.ecoquest.presentation.component.CustomTextField
@@ -35,6 +38,23 @@ fun LoginScreen(navController: NavController) {
     var showPassword by remember {
         mutableStateOf(false)
     }
+
+    val oneTapSignInState = rememberOneTapSignInState()
+    val authenticated = remember {
+        mutableStateOf(false)
+    }
+
+    OneTapSignInWithGoogle(
+        state = oneTapSignInState,
+        clientId = "845503892362-5g03tam8tnpkh67lhalfrhjjfsvbvq22.apps.googleusercontent.com",
+        onTokenIdReceived = { token ->
+            authenticated.value= true
+            Log.d("infoToken", token)
+        },
+        onDialogDismissed = { msg ->
+            Log.d("dismissed", msg)
+        }
+    )
 
     Column(
         Modifier
@@ -72,13 +92,21 @@ fun LoginScreen(navController: NavController) {
             onPasswordToggle = { showPassword = it }
         )
         Spacer(modifier = Modifier.height(15.dp))
-        CustomButton(text = "Masuk")
+        CustomButton(
+            text = "Masuk",
+            onClick = {
+                navController.popBackStack()
+                navController.navigate(Routes.HOME)
+            }
+        )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
             text = "Google",
             color = Color.White,
             textColor = Color.Black,
-            icon = R.drawable.google_icon
+            icon = R.drawable.google_icon,
+            onClick = { oneTapSignInState.open() },
+            enabled = !oneTapSignInState.opened
         )
         Spacer(modifier = Modifier.height(25.dp))
         Row(
