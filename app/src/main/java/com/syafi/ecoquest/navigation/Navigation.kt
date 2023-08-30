@@ -28,10 +28,10 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
             HomeScreen(navController)
         }
         composable(Routes.LOGIN) {
-            LoginScreen(navController)
+            LoginScreen(navController = navController)
         }
         composable(Routes.REGISTER) {
-            RegisterScreen(navController)
+            RegisterScreen(navController = navController)
         }
         composable(Routes.PERINGKAT) {
             LeaderBoardScreen()
