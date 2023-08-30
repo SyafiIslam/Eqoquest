@@ -5,4 +5,5 @@ object Routes {
     const val WELCOME= "welcome"
     const val HOME= "home"
     const val LOGIN= "login"
+    const val REGISTER= "register"
 }

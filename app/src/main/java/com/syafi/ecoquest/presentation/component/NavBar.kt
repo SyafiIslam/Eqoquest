@@ -20,7 +20,7 @@ import com.syafi.ecoquest.ui.theme.sage
 fun NavBar(
     navController: NavController, bottomNavItem: List<NavBar> = listOf(
         NavBar(
-            title = "Bantuan",
+            title = "Beranda",
             icon = painterResource(id = R.drawable.icon_home),
         ),
         NavBar(

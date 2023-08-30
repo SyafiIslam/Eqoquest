@@ -117,7 +117,7 @@ fun WelcomeScreen(
                 if (pagerState.currentPage == 2) {
                     viewModel.saveOnBoardingState(true)
                     navController.popBackStack()
-                    navController.navigate(Routes.HOME)
+                    navController.navigate(Routes.LOGIN)
                 } else {
                     scope.launch {
                         pagerState.animateScrollToPage(

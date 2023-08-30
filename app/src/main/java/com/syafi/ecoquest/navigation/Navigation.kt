@@ -6,13 +6,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.syafi.ecoquest.presentation.home.HomeScreen
 import com.syafi.ecoquest.presentation.login.LoginScreen
+import com.syafi.ecoquest.presentation.login.RegisterScreen
 import com.syafi.ecoquest.presentation.splash.SplashScreen
 import com.syafi.ecoquest.presentation.welcome.WelcomeScreen
 import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun Navigation(navController: NavHostController, afterSplashDestination: String) {
-    NavHost(navController = navController, startDestination = Routes.HOME) {
+    NavHost(navController = navController, startDestination = Routes.SPLASH) {
         composable(Routes.SPLASH) {
             SplashScreen(navController = navController, afterSplashDestination)
         }
@@ -23,7 +24,10 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
             HomeScreen(navController = navController)
         }
         composable(Routes.LOGIN) {
-            LoginScreen()
+            LoginScreen(navController = navController)
+        }
+        composable(Routes.REGISTER) {
+            RegisterScreen(navController = navController)
         }
     }
 }

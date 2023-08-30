@@ -59,7 +59,7 @@ fun CustomTextField(
                 }
             }
         },
-        shape = RoundedCornerShape(15.dp),
+        shape = RoundedCornerShape(5.dp),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.White
         ),
