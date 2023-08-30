@@ -19,12 +19,15 @@ fun CustomButton(
     text: String,
     icon: Int? = null,
     color: Color = MaterialTheme.colors.dark,
-    textColor: Color= Color.White
+    textColor: Color= Color.White,
+    onClick: () -> Unit= {},
+    enabled: Boolean= true
 ) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(backgroundColor = color),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        enabled = enabled
     ) {
         Row(Modifier.padding(vertical = 6.dp)) {
             icon?.let {

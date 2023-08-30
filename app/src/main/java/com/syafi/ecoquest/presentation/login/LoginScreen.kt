@@ -1,5 +1,6 @@
 package com.syafi.ecoquest.presentation.login
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -13,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.stevdzasan.onetap.OneTapSignInWithGoogle
+import com.stevdzasan.onetap.rememberOneTapSignInState
 import com.syafi.ecoquest.R
 import com.syafi.ecoquest.presentation.component.CustomButton
 import com.syafi.ecoquest.presentation.component.CustomTextField
@@ -32,6 +35,24 @@ fun LoginScreen() {
     var showPassword by remember {
         mutableStateOf(false)
     }
+
+    val oneTapSignInState = rememberOneTapSignInState()
+    val authenticated = remember {
+        mutableStateOf(false)
+    }
+
+    OneTapSignInWithGoogle(
+        state = oneTapSignInState,
+        clientId = "845503892362-5g03tam8tnpkh67lhalfrhjjfsvbvq22.apps.googleusercontent.com",
+        onTokenIdReceived = { token ->
+            authenticated.value= true
+            Log.d("infoToken", token)
+git
+        },
+        onDialogDismissed = { msg ->
+            Log.d("dismissed", msg)
+        }
+    )
 
     Column(
         Modifier
@@ -75,7 +96,11 @@ fun LoginScreen() {
             text = "Google",
             color = Color.White,
             textColor = Color.Black,
-            icon = R.drawable.google_icon
+            icon = R.drawable.google_icon,
+            onClick = {
+                oneTapSignInState.open()
+            },
+            enabled = !oneTapSignInState.opened
         )
     }
 }

@@ -29,6 +29,7 @@ import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.ui.theme.grey
 import com.google.accompanist.pager.PagerState
 import com.syafi.ecoquest.R
+import com.syafi.ecoquest.presentation.component.CustomButton
 import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.util.Routes
 import kotlinx.coroutines.CoroutineScope
@@ -73,7 +74,7 @@ fun WelcomeScreen(
                         onClick = {
                             viewModel.saveOnBoardingState(true)
                             navController.popBackStack()
-                            navController.navigate(Routes.HOME)
+                            navController.navigate(Routes.LOGIN)
                         },
                         border = BorderStroke(1.dp, MaterialTheme.colors.dark)
                     ) {
@@ -112,30 +113,19 @@ fun WelcomeScreen(
             )
         }
         Spacer(modifier = Modifier.height(15.dp))
-        Button(
-            onClick = {
-                if (pagerState.currentPage == 2) {
-                    viewModel.saveOnBoardingState(true)
-                    navController.popBackStack()
-                    navController.navigate(Routes.HOME)
-                } else {
-                    scope.launch {
-                        pagerState.animateScrollToPage(
-                            pagerState.currentPage + 1
-                        )
-                    }
+        CustomButton(text = welcomePageList[pagerState.currentPage].btnText, onClick = {
+            if (pagerState.currentPage == 2) {
+                viewModel.saveOnBoardingState(true)
+                navController.popBackStack()
+                navController.navigate(Routes.LOGIN)
+            } else {
+                scope.launch {
+                    pagerState.animateScrollToPage(
+                        pagerState.currentPage + 1
+                    )
                 }
-            },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.dark),
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Text(
-                text = welcomePageList[pagerState.currentPage].btnText,
-                style = MaterialTheme.typography.subtitle1,
-                color = Color.White
-            )
-        }
+            }
+        })
     }
 }
 
