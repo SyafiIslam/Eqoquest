@@ -43,6 +43,11 @@ class MainActivity : ComponentActivity() {
         Routes.PROFIL,
     )
 
+    val showFabList= listOf<String>(
+        Routes.HOME,
+        Routes.KOMUNITAS,
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -58,7 +63,8 @@ class MainActivity : ComponentActivity() {
 
                     CustomScaffold(
                         navController = navController,
-                        showBottomBar = navBackStackEntry?.destination?.route in showBottomBarList
+                        showBottomBar = navBackStackEntry?.destination?.route in showBottomBarList,
+                        showFab = navBackStackEntry?.destination?.route in showFabList,
                     ) {
                         Navigation(navController = navController, screen)
                     }
