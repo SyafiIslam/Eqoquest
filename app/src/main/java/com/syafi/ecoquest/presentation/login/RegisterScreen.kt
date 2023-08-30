@@ -92,7 +92,12 @@ fun RegisterScreen(navController: NavController) {
             }
         )
         Spacer(modifier = Modifier.height(15.dp))
-        CustomButton(text = "Daftar")
+        CustomButton(
+            text = "Daftar",
+            onClick = {
+                navController.navigate(Routes.LOGIN)
+            }
+        )
         Spacer(modifier = Modifier.height(25.dp))
         Row(
             modifier = Modifier

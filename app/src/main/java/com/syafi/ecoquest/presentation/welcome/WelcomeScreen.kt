@@ -73,7 +73,7 @@ fun WelcomeScreen(
                         onClick = {
                             viewModel.saveOnBoardingState(true)
                             navController.popBackStack()
-                            navController.navigate(Routes.HOME)
+                            navController.navigate(Routes.LOGIN)
                         },
                         border = BorderStroke(1.dp, MaterialTheme.colors.dark)
                     ) {
@@ -174,12 +174,17 @@ fun Screen(
                 textAlign = TextAlign.Center,
             )
             if (pagerState.currentPage == 0) {
-                Text(
-                    text = "EcoQuest",
-                    style = MaterialTheme.typography.h5,
-                    color = MaterialTheme.colors.green
-                )
+
             }
+            Text(
+                text = "EcoQuest",
+                style = MaterialTheme.typography.h5,
+                color =
+                if (pagerState.currentPage == 0)
+                    MaterialTheme.colors.green
+                else
+                    Color.White
+            )
         }
     }
 }

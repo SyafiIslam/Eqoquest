@@ -8,8 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.size.Size
 import com.syafi.ecoquest.ui.theme.dark
 
 @Composable
@@ -17,12 +19,15 @@ fun CustomButton(
     text: String,
     icon: Int? = null,
     color: Color = MaterialTheme.colors.dark,
-    textColor: Color= Color.White
+    textColor: Color= Color.White,
+    onClick: () -> Unit= {},
+    enabled: Boolean= true
 ) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(backgroundColor = color),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        enabled = enabled,
     ) {
         Row(Modifier.padding(vertical = 6.dp)) {
             icon?.let {

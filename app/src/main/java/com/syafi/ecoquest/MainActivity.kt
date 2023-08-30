@@ -8,18 +8,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.syafi.ecoquest.navigation.Navigation
+import com.syafi.ecoquest.presentation.component.CustomScaffold
+import com.syafi.ecoquest.presentation.component.NavBar
 import com.syafi.ecoquest.presentation.splash.SplashViewModel
 import com.syafi.ecoquest.ui.theme.EcoQuestTheme
 import com.syafi.ecoquest.ui.theme.cream
 import com.syafi.ecoquest.ui.theme.sage
+import com.syafi.ecoquest.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,6 +34,14 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var splashViewModel: SplashViewModel
+
+    val showBottomBarList= listOf<String>(
+        Routes.HOME,
+        Routes.PERINGKAT,
+        Routes.KOMUNITAS,
+        Routes.HADIAH,
+        Routes.PROFIL,
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +54,14 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val screen = splashViewModel._startDestination
                     val navController= rememberNavController()
-                    Navigation(navController = navController, afterSplashDestination = screen)
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+
+                    CustomScaffold(
+                        navController = navController,
+                        showBottomBar = navBackStackEntry?.destination?.route in showBottomBarList
+                    ) {
+                        Navigation(navController = navController, screen)
+                    }
                 }
             }
         }

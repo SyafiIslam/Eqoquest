@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.syafi.ecoquest.data.misiList
 import com.syafi.ecoquest.model.Misi
+import com.syafi.ecoquest.presentation.component.CustomLinearProgressBar
 import com.syafi.ecoquest.ui.theme.cream
 import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.ui.theme.green
@@ -60,15 +61,24 @@ fun MisiItem(misi: Misi, index: Int) {
 
             Spacer(modifier = Modifier.height(5.dp))
 
-            LinearProgressIndicator(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(CircleShape),
+//            LinearProgressIndicator(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .clip(CircleShape),
+//                color =
+//                    if (index % 2 == 0) MaterialTheme.colors.dark
+//                    else MaterialTheme.colors.green,
+//                backgroundColor = Color.White,
+//                progress = misi.progress
+//            )
+
+            CustomLinearProgressBar(
+                progress = misi.progress,
                 color =
-                    if (index % 2 == 0) MaterialTheme.colors.dark
-                    else MaterialTheme.colors.green,
-                backgroundColor = Color.White,
-                progress = misi.progress
+                if (index % 2 == 0)
+                    MaterialTheme.colors.dark
+                else
+                    MaterialTheme.colors.green,
             )
 
             Text(

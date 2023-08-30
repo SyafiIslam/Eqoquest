@@ -7,6 +7,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class NavBar(
     val title: String,
-//    @DrawableRes
-    val icon: Painter
+    val icon: Painter,
+    val route: String
 )

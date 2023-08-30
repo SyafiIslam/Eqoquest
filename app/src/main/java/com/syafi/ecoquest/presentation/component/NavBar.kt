@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -11,10 +12,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.syafi.ecoquest.model.NavBar
 import com.syafi.ecoquest.R
-import com.syafi.ecoquest.ui.theme.green
+import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.ui.theme.sage
+import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun NavBar(
@@ -22,56 +25,33 @@ fun NavBar(
         NavBar(
             title = "Beranda",
             icon = painterResource(id = R.drawable.icon_home),
+            route = Routes.HOME
         ),
         NavBar(
             title = "Peringkat",
-            icon = painterResource(id = R.drawable.icon_leaderboard)
+            icon = painterResource(id = R.drawable.icon_leaderboard),
+            route = Routes.PERINGKAT
+        ),
+        NavBar(
+            title = "Komunitas",
+            icon = painterResource(id = R.drawable.icon_komunitas),
+            route = Routes.KOMUNITAS
         ),
         NavBar(
             title = "Hadiah",
-            icon = painterResource(id = R.drawable.icon_reward)
+            icon = painterResource(id = R.drawable.icon_reward),
+            route = Routes.HADIAH
         ),
         NavBar(
             title = "Profil",
-            icon = painterResource(id = R.drawable.icon_profile)
+            icon = painterResource(id = R.drawable.icon_profile),
+            route = Routes.PROFIL
         )
     )
 ) {
-//    Card(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .background(Color.White),
-//        elevation = 5.dp
-//    ) {
-//        BottomNavigation(
-//            modifier = Modifier.fillMaxWidth()
-//        ) {
-//            bottomNavItem.forEach {
-//                BottomNavigationItem(
-//                    selected = false,
-//                    onClick = { /*TODO*/ },
-//                    icon = {
-//                        Column(
-//                            modifier = Modifier.padding(8.dp),
-//                            horizontalAlignment = Alignment.CenterHorizontally
-//                        ) {
-//                            Icon(
-//                                painter = it.icon,
-//                                contentDescription = it.title,
-//                                tint = MaterialTheme.colors.sage
-//                            )
-//                            Text(
-//                                text = it.title,
-//                                color = MaterialTheme.colors.sage
-//                            )
-//                        }
-//                    },
-//                )
-//            }
-//        }
-//
-//    }
-//}
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -80,8 +60,8 @@ fun NavBar(
         BottomNavigation() {
             bottomNavItem.forEach {
                 BottomNavigationItem(
-                    selected = false,
-                    onClick = { /*TODO*/ },
+                    selected = navBackStackEntry?.destination?.route == it.route,
+                    onClick = { navController.navigate(it.route) },
                     icon = {
                         Column(
                             modifier = Modifier
@@ -93,14 +73,19 @@ fun NavBar(
                             Icon(
                                 painter = it.icon,
                                 contentDescription = it.title,
-                                tint = MaterialTheme.colors.sage,
-//                                modifier = Modifier
-//                                    .align(Alignment.Center)
+                                tint =
+                                if (navBackStackEntry?.destination?.route == it.route)
+                                    MaterialTheme.colors.dark
+                                else
+                                    MaterialTheme.colors.sage
                             )
                             Text(
                                 text = it.title,
-                                color = MaterialTheme.colors.sage,
-//                                modifier = Modifier.align(Alignment.BottomCenter)
+                                color =
+                                if (navBackStackEntry?.destination?.route == it.route)
+                                    MaterialTheme.colors.dark
+                                else
+                                    MaterialTheme.colors.sage
                             )
                         }
                     },
