@@ -65,6 +65,16 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         showBottomBar = navBackStackEntry?.destination?.route in showBottomBarList,
                         showFab = navBackStackEntry?.destination?.route in showFabList,
+                        onFabClick = {
+                            when(navBackStackEntry?.destination?.route) {
+                                Routes.HOME -> {
+                                    navController.navigate(Routes.TAMBAH_RUTINITAS)
+                                }
+                                Routes.KOMUNITAS -> {
+
+                                }
+                            }
+                        }
                     ) {
                         Navigation(navController = navController, screen)
                     }

@@ -23,11 +23,12 @@ fun CustomTextField(
     text: String,
     placeholder: String,
     trailingIcon: ImageVector? = null,
+    leadingIcon: ImageVector? = null,
     showPassword: Boolean = false,
     onValueChange: (String) -> Unit = {},
-    onPasswordToggle: (Boolean) -> Unit= {},
+    onPasswordToggle: (Boolean) -> Unit = {},
     label: String? = null,
-    isPassword: Boolean= false
+    isPassword: Boolean = false
 ) {
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
@@ -57,6 +58,11 @@ fun CustomTextField(
                         )
                     }
                 }
+            }
+        },
+        leadingIcon = {
+            if (leadingIcon != null) {
+                Icon(imageVector = leadingIcon, contentDescription = "")
             }
         },
         shape = RoundedCornerShape(5.dp),

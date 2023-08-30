@@ -10,4 +10,5 @@ object Routes {
     const val KOMUNITAS= "komunitas"
     const val HADIAH= "hadiah"
     const val PROFIL= "profil"
+    const val TAMBAH_RUTINITAS= "tambah_rutinitas"
 }
