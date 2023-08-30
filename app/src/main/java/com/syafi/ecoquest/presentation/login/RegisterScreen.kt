@@ -6,10 +6,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -22,7 +23,10 @@ import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun RegisterScreen(navController: NavController) {
+    var fullName by remember {
+        mutableStateOf("")
+    }
 
     var email by remember {
         mutableStateOf("")
@@ -37,49 +41,58 @@ fun LoginScreen(navController: NavController) {
     }
 
     Column(
-        Modifier
+        modifier = Modifier
             .fillMaxSize()
             .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
-            model = R.drawable.login_logo,
-            contentDescription = "",
-            modifier = Modifier.size(200.dp)
+            modifier = Modifier.size(200.dp),
+            model = R.drawable.register_logo,
+            contentDescription = "Gambar Register",
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "Selamat Datang",
+            text = "Buat Akun",
             style = MaterialTheme.typography.h2,
             color = MaterialTheme.colors.dark
         )
         Spacer(modifier = Modifier.height(20.dp))
         CustomTextField(
+            text = fullName,
+            placeholder = "Nama Lengkap",
+            label = "Nama Lengkap",
+            onValueChange = {
+                fullName = it
+            }
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomTextField(
             text = email,
             placeholder = "Email",
             label = "Email",
-            onValueChange = { email = it })
+            onValueChange = {
+                email = it
+            }
+        )
         Spacer(modifier = Modifier.height(10.dp))
         CustomTextField(
             text = password,
-            placeholder = "Password",
+            placeholder = "Kata Sandi",
+            label = "Kata Sandi",
             isPassword = true,
-            onValueChange = { password = it },
+            onValueChange = {
+                password = it
+            },
             trailingIcon = Icons.Filled.Visibility,
-            label = "Password",
             showPassword = showPassword,
-            onPasswordToggle = { showPassword = it }
+            onPasswordToggle = {
+                showPassword = it
+            }
         )
         Spacer(modifier = Modifier.height(15.dp))
-        CustomButton(text = "Masuk")
-        Spacer(modifier = Modifier.height(10.dp))
-        CustomButton(
-            text = "Google",
-            color = Color.White,
-            textColor = Color.Black,
-            icon = R.drawable.google_icon
-        )
+        CustomButton(text = "Daftar")
         Spacer(modifier = Modifier.height(25.dp))
         Row(
             modifier = Modifier
@@ -87,19 +100,19 @@ fun LoginScreen(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Belum punya akun?",
-                style = MaterialTheme.typography.body1,
+                text = "Sudah punya akun?",
+                style = MaterialTheme.typography.body1
             )
             Spacer(modifier = Modifier.width(5.dp))
             Text(
                 modifier = Modifier
                     .clickable {
-                        navController.navigate(Routes.REGISTER)
+                        navController.navigate(Routes.LOGIN)
                     },
-                text = "Daftar",
+                text = "Masuk",
                 style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colors.green
+                color = MaterialTheme.colors.green,
+                fontWeight = FontWeight.SemiBold
             )
         }
     }
@@ -107,6 +120,6 @@ fun LoginScreen(navController: NavController) {
 
 //@Preview(showBackground = true)
 //@Composable
-//fun ShowLoginScreen() {
-//    LoginScreen()
+//fun Design() {
+//    RegisterScreen()
 //}
