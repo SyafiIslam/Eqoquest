@@ -1,9 +1,6 @@
 package com.syafi.ecoquest.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,7 +12,7 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun Navigation(navController: NavHostController, afterSplashDestination: String) {
-    NavHost(navController = navController, startDestination = Routes.SPLASH) {
+    NavHost(navController = navController, startDestination = Routes.LOGIN) {
         composable(Routes.SPLASH) {
             SplashScreen(navController = navController, afterSplashDestination)
         }
