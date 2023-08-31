@@ -16,7 +16,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.syafi.ecoquest.model.NavBar
 import com.syafi.ecoquest.R
 import com.syafi.ecoquest.ui.theme.dark
-import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.ui.theme.sage
 import com.syafi.ecoquest.util.Routes
 
@@ -35,7 +34,7 @@ fun NavBar(
         ),
         NavBar(
             title = "Komunitas",
-            icon = painterResource(id = R.drawable.komunitas),
+            icon = painterResource(id = R.drawable.icon_komunitas),
             route = Routes.KOMUNITAS
         ),
         NavBar(

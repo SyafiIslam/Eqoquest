@@ -8,8 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.size.Size
 import com.syafi.ecoquest.ui.theme.dark
 
 @Composable

@@ -19,16 +19,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.syafi.ecoquest.data.misiList
 import com.syafi.ecoquest.model.Misi
+import com.syafi.ecoquest.presentation.component.CustomLinearProgressBar
 import com.syafi.ecoquest.ui.theme.cream
 import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.ui.theme.sage
+import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun MisiItem(misi: Misi, index: Int) {
-
+fun MisiItem(misi: Misi, index: Int, navController: NavController) {
     var id by remember {
         mutableStateOf(index)
     }
@@ -37,11 +39,15 @@ fun MisiItem(misi: Misi, index: Int) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 10.dp)
-            .clickable { },
-        elevation = 4.dp,
+            .clickable {
+                navController.navigate(Routes.CHALLENGE)
+            },
+        elevation = 3.dp,
         backgroundColor =
-            if (index % 2 == 0) MaterialTheme.colors.sage
-            else MaterialTheme.colors.cream,
+            if (index % 2 == 0)
+                MaterialTheme.colors.sage
+            else
+                MaterialTheme.colors.cream,
         shape = RoundedCornerShape(10.dp)
     ) {
         Column(
@@ -66,33 +72,32 @@ fun MisiItem(misi: Misi, index: Int) {
             }
 
             Spacer(modifier = Modifier.height(5.dp))
-
-            LinearProgressIndicator(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(CircleShape),
+            CustomLinearProgressBar(
+                progress = misi.progress,
                 color =
-                    if (index % 2 == 0) MaterialTheme.colors.dark
-                    else MaterialTheme.colors.green,
-                backgroundColor = Color.White,
-                progress = misi.progress
+                    if (index % 2 == 0)
+                        MaterialTheme.colors.dark
+                    else
+                        MaterialTheme.colors.green
             )
-
             Text(
                 text = "Tersisa ${misi.timer}j",
                 style = MaterialTheme.typography.body2,
                 fontSize = 10.sp,
                 color =
-                    if (index % 2 == 0) MaterialTheme.colors.dark
-                    else MaterialTheme.colors.green
+                    if (index % 2 == 0) {
+                        MaterialTheme.colors.dark
+                    } else {
+                        MaterialTheme.colors.green
+                    }
             )
         }
     }
 }
 
-@Preview (showBackground = true)
-@Composable
-fun Design() {
-    val misi = misiList[0]
-    MisiItem(misi, 0)
-}
+//@Preview (showBackground = true)
+//@Composable
+//fun Design() {
+//    val misi = misiList[0]
+//    MisiItem(misi, 0, navController)
+//}

@@ -153,7 +153,7 @@ fun HomeScreen(
 
         LazyColumn {
             items(misiList.size) {
-                MisiItem(misi = misiList[it], it)
+                MisiItem(misi = misiList[it], it, navController)
             }
         }
     }
