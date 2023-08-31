@@ -40,7 +40,7 @@ fun DialogUi(navController: NavController) {
     Column(
         Modifier
             .wrapContentWidth()
-            .padding(12.dp),
+            .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
