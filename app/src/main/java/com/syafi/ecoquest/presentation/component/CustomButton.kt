@@ -21,12 +21,13 @@ fun CustomButton(
     color: Color = MaterialTheme.colors.dark,
     textColor: Color= Color.White,
     onClick: () -> Unit= {},
-    enabled: Boolean= true
+    enabled: Boolean= true,
+    modifier: Modifier= Modifier.fillMaxWidth()
 ) {
     Button(
         onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(backgroundColor = color),
-        modifier = Modifier.fillMaxWidth(),
+        modifier =modifier,
         enabled = enabled,
     ) {
         Row(Modifier.padding(vertical = 6.dp)) {

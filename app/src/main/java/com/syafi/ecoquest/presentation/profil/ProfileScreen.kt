@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.R
@@ -33,10 +34,11 @@ import com.syafi.ecoquest.presentation.profil.component.Experience
 import com.syafi.ecoquest.ui.theme.cream
 import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.ui.theme.sage
+import com.syafi.ecoquest.util.Routes
 
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavController) {
     Box {
         Column(
             Modifier
@@ -73,7 +75,7 @@ fun ProfileScreen() {
                         textDecoration = TextDecoration.Underline,
                         style = MaterialTheme.typography.subtitle2,
                         modifier = Modifier.clickable {
-
+                            navController.navigate(Routes.EDIT_PROFIL)
                         }
                     )
                     Spacer(modifier = Modifier.height(10.dp))
@@ -93,54 +95,3 @@ fun ProfileScreen() {
         )
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun Prev() {
-    ProfileScreen()
-}
-
-//Box(contentAlignment = Alignment.TopCenter) {
-//    Card(
-//        elevation = 10.dp,
-//        modifier = Modifier.padding(vertical = 20.dp, horizontal = 10.dp),
-//        backgroundColor = MaterialTheme.colors.cream
-//    ) {
-//        Column(
-//            Modifier.fillMaxWidth(),
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            verticalArrangement = Arrangement.Center
-//        ) {
-//            Box() {
-//                AsyncImage(
-//                    model = R.drawable.profile_picture,
-//                    contentDescription = "profil_pic",
-//                    Modifier
-//                        .size(96.dp)
-//                        .offset(y = (-25).dp)
-//                        .clip(CircleShape)
-//                        .align(Alignment.Center)
-//                )
-//                Box(
-//                    modifier = Modifier
-//                        .align(Alignment.BottomCenter)
-////                                .offset(y = 75.dp)
-//                ) {
-//                    AsyncImage(
-//                        model = R.drawable.kotak_xp,
-//                        contentDescription = "",
-//                        Modifier.size(30.dp)
-//                    )
-//                    Text(
-//                        text = "2", color = Color.White,
-//                        modifier = Modifier
-//                            .align(Alignment.Center),
-//                        style = MaterialTheme.typography.h5
-//                    )
-//                }
-//            }
-//            Spacer(modifier = Modifier.height(100.dp))
-//            Text(text = "Bambang", style = MaterialTheme.typography.h5)
-//        }
-//    }
-//}

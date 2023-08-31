@@ -5,6 +5,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -22,7 +23,8 @@ fun CompletedItem(completedData: Completed) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
+                .padding(20.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Row(Modifier.weight(1f)) {
                 AsyncImage(
