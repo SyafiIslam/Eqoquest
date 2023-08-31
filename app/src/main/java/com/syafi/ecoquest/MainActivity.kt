@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(Routes.TAMBAH_RUTINITAS)
                                 }
                                 Routes.KOMUNITAS -> {
-
+                                    navController.navigate(Routes.ADD_POSTINGAN)
                                 }
                             }
                         }

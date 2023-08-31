@@ -13,4 +13,5 @@ object Routes {
     const val PROFIL= "profil"
     const val TAMBAH_RUTINITAS= "tambah_rutinitas"
     const val EDIT_PROFIL= "edit_profil"
+    const val ADD_POSTINGAN= "add_post"
 }
