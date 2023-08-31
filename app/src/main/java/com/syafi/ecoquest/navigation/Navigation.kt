@@ -13,6 +13,7 @@ import com.syafi.ecoquest.presentation.login.RegisterScreen
 import com.syafi.ecoquest.presentation.peringkat.LeaderBoardScreen
 import com.syafi.ecoquest.presentation.profil.ProfileScreen
 import com.syafi.ecoquest.presentation.splash.SplashScreen
+import com.syafi.ecoquest.presentation.tambah_rutinitas.AddRutinitasScreen
 import com.syafi.ecoquest.presentation.welcome.WelcomeScreen
 import com.syafi.ecoquest.util.Routes
 
@@ -48,6 +49,9 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
         }
         composable(Routes.PROFIL) {
             ProfileScreen()
+        }
+        composable(Routes.TAMBAH_RUTINITAS) {
+            AddRutinitasScreen(navController)
         }
     }
 }
