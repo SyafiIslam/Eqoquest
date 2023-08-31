@@ -3,6 +3,7 @@ package com.syafi.ecoquest.presentation.komunitas.component
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -70,7 +71,7 @@ fun CommunityItem(community: Komunitas, index: Int) {
                         }
                         Text(
                             text = "${community.exp} exp",
-                            style = MaterialTheme.typography.body2,
+                            style = MaterialTheme.typography.body1,
                             color = Color.LightGray
                         )
                     }
@@ -87,8 +88,15 @@ fun CommunityItem(community: Komunitas, index: Int) {
                         contentDescription = null,
                         modifier = Modifier.fillMaxWidth()
                     )
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
             }
+        }
+        if (index != 0) {
+            Divider(
+                color = Color.LightGray,
+                thickness = 1.dp
+            )
         }
     }
 }
@@ -97,5 +105,5 @@ fun CommunityItem(community: Komunitas, index: Int) {
 @Composable
 fun Design() {
     val komunitas = komunitasList[0]
-    CommunityItem(community = komunitas, index = 0)
+    CommunityItem(community = komunitas, 0)
 }

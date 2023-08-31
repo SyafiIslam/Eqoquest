@@ -45,7 +45,7 @@ val komunitasList = listOf<Komunitas>(
         "Windah",
         false,
         149,
-        "Tips dari gue untuk mengurangi emisi karbon:",
+        "Tips dari gue untuk mengurangi emisi karbon:\n1. Perbanyak jalan kaki/bersepeda kalau ke tempat yang dekat\n2. Matiin lampu atau listrik kalau belum butuh\n\nLess action tapi dampaknya bisa besar kalau semuanya action.\nSemangat guys!",
         false
     ),
     Komunitas(

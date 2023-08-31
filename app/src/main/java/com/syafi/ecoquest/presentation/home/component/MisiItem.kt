@@ -85,10 +85,11 @@ fun MisiItem(misi: Misi, index: Int, navController: NavController) {
                 style = MaterialTheme.typography.body2,
                 fontSize = 10.sp,
                 color =
-                    if (index % 2 == 0)
+                    if (index % 2 == 0) {
                         MaterialTheme.colors.dark
-                    else
+                    } else {
                         MaterialTheme.colors.green
+                    }
             )
         }
     }
