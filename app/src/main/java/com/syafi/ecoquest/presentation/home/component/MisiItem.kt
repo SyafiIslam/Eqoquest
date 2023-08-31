@@ -72,18 +72,6 @@ fun MisiItem(misi: Misi, index: Int, navController: NavController) {
             }
 
             Spacer(modifier = Modifier.height(5.dp))
-
-//            LinearProgressIndicator(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .clip(CircleShape),
-//                color =
-//                    if (index % 2 == 0) MaterialTheme.colors.dark
-//                    else MaterialTheme.colors.green,
-//                backgroundColor = Color.White,
-//                progress = misi.progress
-//            )
-
             CustomLinearProgressBar(
                 progress = misi.progress,
                 color =

@@ -3,6 +3,8 @@ package com.syafi.ecoquest.presentation.challenge
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.syafi.ecoquest.R
+import com.syafi.ecoquest.presentation.component.CircularButton
 import com.syafi.ecoquest.presentation.component.CustomButton
 import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.ui.theme.sage
@@ -28,6 +31,17 @@ fun ChallengeScreen(navController: NavController) {
                 contentDescription = "",
                 modifier = Modifier.fillMaxWidth()
             )
+            Column(
+                modifier = Modifier.padding(20.dp)
+            ) {
+                CircularButton(
+                    onClick = {
+                        navController.popBackStack()
+                        navController.navigate(Routes.HOME)
+                    },
+                    icon = Icons.Default.ArrowBack
+                )
+            }
         }
         Column(
             modifier = Modifier.padding(15.dp)
@@ -93,7 +107,7 @@ fun ChallengeScreen(navController: NavController) {
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "3 hari",
+                        text = "36 jam",
                         style = MaterialTheme.typography.h6,
                         color = MaterialTheme.colors.sage,
                         fontWeight = FontWeight.Normal
