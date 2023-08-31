@@ -8,13 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.size.Size
 import com.syafi.ecoquest.R
 import com.syafi.ecoquest.model.Completed
 import com.syafi.ecoquest.ui.theme.green
 
 @Composable
-fun Completed(completedData: Completed) {
+fun CompletedItem(completedData: Completed) {
     Card(
         elevation = 0.dp,
         backgroundColor = MaterialTheme.colors.green,
