@@ -12,4 +12,5 @@ object Routes {
     const val HADIAH= "hadiah"
     const val PROFIL= "profil"
     const val TAMBAH_RUTINITAS= "tambah_rutinitas"
+    const val EDIT_PROFIL= "edit_profil"
 }

@@ -23,7 +23,6 @@ fun CustomTextField(
     text: String,
     placeholder: String,
     trailingIcon: ImageVector? = null,
-    leadingIcon: ImageVector? = null,
     showPassword: Boolean = false,
     onValueChange: (String) -> Unit = {},
     onPasswordToggle: (Boolean) -> Unit = {},
@@ -60,14 +59,10 @@ fun CustomTextField(
                 }
             }
         },
-        leadingIcon = {
-            if (leadingIcon != null) {
-                Icon(imageVector = leadingIcon, contentDescription = "")
-            }
-        },
         shape = RoundedCornerShape(5.dp),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.White
+            backgroundColor = Color.White,
+            textColor = Color.Black
         ),
         label = {
             label?.let {

@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.syafi.ecoquest.presentation.challenge.ChallengeScreen
+import com.syafi.ecoquest.presentation.edit_profil.EditProfilScreen
 import com.syafi.ecoquest.presentation.hadiah.RewardScreen
 import com.syafi.ecoquest.presentation.home.HomeScreen
 import com.syafi.ecoquest.presentation.komunitas.CommunityScreen
@@ -48,10 +49,13 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
             RewardScreen()
         }
         composable(Routes.PROFIL) {
-            ProfileScreen()
+            ProfileScreen(navController)
         }
         composable(Routes.TAMBAH_RUTINITAS) {
             AddRutinitasScreen(navController)
+        }
+        composable(Routes.EDIT_PROFIL) {
+            EditProfilScreen(navController)
         }
     }
 }
