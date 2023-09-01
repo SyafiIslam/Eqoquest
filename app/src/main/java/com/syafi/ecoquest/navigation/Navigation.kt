@@ -2,8 +2,10 @@ package com.syafi.ecoquest.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.syafi.ecoquest.presentation.add_postingan.AddPost
 import com.syafi.ecoquest.presentation.challenge.ChallengeScreen
 import com.syafi.ecoquest.presentation.edit_profil.EditProfilScreen
@@ -21,7 +23,7 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun Navigation(navController: NavHostController, afterSplashDestination: String) {
-    NavHost(navController = navController, startDestination = Routes.SPLASH) {
+    NavHost(navController = navController, startDestination = Routes.PERINGKAT) {
         composable(Routes.SPLASH) {
             SplashScreen(navController = navController, afterSplashDestination)
         }
@@ -35,10 +37,38 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
             RegisterScreen(navController = navController)
         }
         composable(Routes.HOME) {
-            HomeScreen(navController)
+            HomeScreen(navController = navController, email = "")
         }
-        composable(Routes.CHALLENGE) {
-            ChallengeScreen(navController)
+        composable(
+            Routes.HOME + "?email={email}",
+            arguments = listOf(
+                navArgument(name = "email") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val email= it.arguments?.getString("email")
+            email?.let {
+                HomeScreen(navController = navController, email = email)
+            }
+        }
+        composable(Routes.CHALLENGE + "?email={email}" + "?id={id}",
+            arguments = listOf(
+                navArgument(name = "email") {
+                    type = NavType.StringType
+                },
+                navArgument(name = "id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            val email = it.arguments?.getString("email")
+            val id = it.arguments?.getInt("id")
+            email?.let {
+                if (id != null) {
+                    ChallengeScreen(navController = navController, email = email, id = id)
+                }
+            }
         }
         composable(Routes.PERINGKAT) {
             LeaderBoardScreen()

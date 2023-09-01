@@ -38,7 +38,7 @@ class RegisterViewModel: ViewModel() {
                 )
 
                 if (user != null) {
-                    db.collection(email)
+                    val nama= db.collection(email)
                         .document("user_data")
                         .set(userData)
                         .addOnSuccessListener {
