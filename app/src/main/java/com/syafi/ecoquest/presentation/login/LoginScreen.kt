@@ -1,6 +1,7 @@
 package com.syafi.ecoquest.presentation.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -11,10 +12,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.auth.FirebaseAuth
 import com.stevdzasan.onetap.OneTapSignInWithGoogle
 import com.stevdzasan.onetap.rememberOneTapSignInState
 import com.syafi.ecoquest.R
@@ -26,7 +29,6 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun LoginScreen(navController: NavController) {
-
     var email by remember {
         mutableStateOf("")
     }
@@ -43,6 +45,10 @@ fun LoginScreen(navController: NavController) {
     val authenticated = remember {
         mutableStateOf(false)
     }
+
+    val context = LocalContext.current
+
+    val auth = FirebaseAuth.getInstance()
 
     OneTapSignInWithGoogle(
         state = oneTapSignInState,
@@ -95,8 +101,27 @@ fun LoginScreen(navController: NavController) {
         CustomButton(
             text = "Masuk",
             onClick = {
-                navController.popBackStack()
-                navController.navigate(Routes.HOME)
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val user = auth.currentUser
+                            if (user != null) {
+                                navController.popBackStack()
+                                navController.navigate(Routes.HOME)
+                            } else {
+
+                            }
+                        }
+                    }
+                    .addOnFailureListener {
+                        email = ""
+                        password = ""
+                        Toast.makeText(
+                            context,
+                            "Email atau password salah. Coba ulang kembali",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
             }
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -132,9 +157,3 @@ fun LoginScreen(navController: NavController) {
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun ShowLoginScreen() {
-//    LoginScreen()
-//}

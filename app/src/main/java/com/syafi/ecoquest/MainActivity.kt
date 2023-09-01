@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.FirebaseApp
 import com.syafi.ecoquest.navigation.Navigation
 import com.syafi.ecoquest.presentation.component.CustomScaffold
 import com.syafi.ecoquest.presentation.component.NavBar
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContent {
             EcoQuestTheme {
                 // A surface container using the 'background' color from the theme
@@ -71,7 +73,6 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(Routes.TAMBAH_RUTINITAS)
                                 }
                                 Routes.KOMUNITAS -> {
-
                                 }
                             }
                         }

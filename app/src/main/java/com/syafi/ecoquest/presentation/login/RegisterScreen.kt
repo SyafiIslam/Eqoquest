@@ -1,5 +1,6 @@
 package com.syafi.ecoquest.presentation.login
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -11,11 +12,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.syafi.ecoquest.R
+import com.syafi.ecoquest.model.UserData
 import com.syafi.ecoquest.presentation.component.CustomButton
 import com.syafi.ecoquest.presentation.component.CustomTextField
 import com.syafi.ecoquest.ui.theme.dark
@@ -39,6 +46,11 @@ fun RegisterScreen(navController: NavController) {
     var showPassword by remember {
         mutableStateOf(false)
     }
+
+    val context = LocalContext.current
+
+    val auth = FirebaseAuth.getInstance()
+    val db = Firebase.firestore
 
     Column(
         modifier = Modifier
@@ -95,7 +107,44 @@ fun RegisterScreen(navController: NavController) {
         CustomButton(
             text = "Daftar",
             onClick = {
-                navController.navigate(Routes.LOGIN)
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnSuccessListener {
+                        val user = it.user
+                        val userData = UserData(
+                            fullName,
+                            email,
+                            password
+                        )
+
+                        if (user != null) {
+                            db.collection(email)
+                                .document("user_data")
+                                .set(userData)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Akun berhasil dibuat",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    navController.navigate(Routes.LOGIN)
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(
+                                        context,
+                                        "${it.message}",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    navController.navigate(Routes.LOGIN)
+                                }
+                        }
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(
+                            context,
+                            "${it.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
             }
         )
         Spacer(modifier = Modifier.height(25.dp))
