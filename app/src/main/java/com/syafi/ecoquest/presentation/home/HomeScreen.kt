@@ -3,6 +3,8 @@ package com.syafi.ecoquest.presentation.home
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,10 +35,12 @@ import com.syafi.ecoquest.ui.theme.grey
 fun HomeScreen(
     navController: NavController,
 ) {
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(30.dp),
+            .padding(30.dp)
+            .scrollable(scrollState, Orientation.Vertical),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -156,6 +160,56 @@ fun HomeScreen(
                 MisiItem(misi = misiList[it], it, navController)
             }
         }
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Misi",
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Left
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Misi",
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Left
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Misi",
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Left
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Misi",
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Left
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Misi",
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Left
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Misi",
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Left
+        )
+
+
     }
 }
 

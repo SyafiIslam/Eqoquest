@@ -22,6 +22,9 @@ fun CommunityScreen() {
             items(komunitasList.size) {
                 CommunityItem(community = komunitasList[it], it)
             }
+            item {
+                Spacer(modifier = Modifier.height(40.dp))
+            }
         }
     }
 }

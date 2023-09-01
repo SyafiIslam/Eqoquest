@@ -122,9 +122,3 @@ fun RegisterScreen(navController: NavController) {
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun Design() {
-//    RegisterScreen()
-//}
