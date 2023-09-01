@@ -61,15 +61,15 @@ fun AddPost(navController: NavController) {
                 color = MaterialTheme.colors.abu,
                 style = MaterialTheme.typography.body1
             )
-            OutlinedTextField(
-                value = post,
-                placeholder = { Text(text = "Tulis...") },
+
+            CustomTextField(
+                text = post,
+                placeholder = "Tulis...",
                 onValueChange = {
                     post = it
                 },
-                minLines = 4,
-                maxLines = 8,
-                modifier = Modifier.fillMaxWidth()
+                minLine = 4,
+                maxLine = 8,
             )
         }
         CustomButton(
@@ -78,7 +78,7 @@ fun AddPost(navController: NavController) {
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter),
             onClick = {
-                openDialog.value= true
+                openDialog.value = true
             }
         )
 

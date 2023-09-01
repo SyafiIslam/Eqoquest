@@ -1,5 +1,6 @@
 package com.syafi.ecoquest.presentation.login
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -11,34 +12,35 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.syafi.ecoquest.R
+import com.syafi.ecoquest.model.UserData
 import com.syafi.ecoquest.presentation.component.CustomButton
 import com.syafi.ecoquest.presentation.component.CustomTextField
+import com.syafi.ecoquest.presentation.register.RegisterViewModel
 import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun RegisterScreen(navController: NavController) {
-    var fullName by remember {
-        mutableStateOf("")
-    }
-
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
 
     var showPassword by remember {
         mutableStateOf(false)
     }
+
+    val context = LocalContext.current
+
+    val viewModel= viewModel<RegisterViewModel>()
 
     Column(
         modifier = Modifier
@@ -60,30 +62,30 @@ fun RegisterScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(20.dp))
         CustomTextField(
-            text = fullName,
+            text = viewModel.fullName,
             placeholder = "Nama Lengkap",
             label = "Nama Lengkap",
             onValueChange = {
-                fullName = it
+                viewModel.fullName = it
             }
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomTextField(
-            text = email,
+            text = viewModel.email,
             placeholder = "Email",
             label = "Email",
             onValueChange = {
-                email = it
+                viewModel.email = it
             }
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomTextField(
-            text = password,
+            text = viewModel.password,
             placeholder = "Kata Sandi",
             label = "Kata Sandi",
             isPassword = true,
             onValueChange = {
-                password = it
+                viewModel.password = it
             },
             trailingIcon = Icons.Filled.Visibility,
             showPassword = showPassword,
@@ -95,7 +97,12 @@ fun RegisterScreen(navController: NavController) {
         CustomButton(
             text = "Daftar",
             onClick = {
-                navController.navigate(Routes.LOGIN)
+
+                if (viewModel.email == "" || viewModel.fullName == "" || viewModel.password == "") {
+                    viewModel.handleBlank(context)
+                } else {
+                    viewModel.handleRegister(navController, context)
+                }
             }
         )
         Spacer(modifier = Modifier.height(25.dp))

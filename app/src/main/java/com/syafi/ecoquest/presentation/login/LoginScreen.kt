@@ -1,6 +1,7 @@
 package com.syafi.ecoquest.presentation.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -11,10 +12,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.auth.FirebaseAuth
 import com.stevdzasan.onetap.OneTapSignInWithGoogle
 import com.stevdzasan.onetap.rememberOneTapSignInState
 import com.syafi.ecoquest.R
@@ -26,29 +30,25 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun LoginScreen(navController: NavController) {
-
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
-
     var showPassword by remember {
         mutableStateOf(false)
     }
 
     val oneTapSignInState = rememberOneTapSignInState()
+
     val authenticated = remember {
         mutableStateOf(false)
     }
+
+    val context = LocalContext.current
+
+    val viewModel= viewModel<LoginViewModel>()
 
     OneTapSignInWithGoogle(
         state = oneTapSignInState,
         clientId = "845503892362-5g03tam8tnpkh67lhalfrhjjfsvbvq22.apps.googleusercontent.com",
         onTokenIdReceived = { token ->
-            authenticated.value= true
+            authenticated.value = true
             Log.d("infoToken", token)
         },
         onDialogDismissed = { msg ->
@@ -76,16 +76,16 @@ fun LoginScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(20.dp))
         CustomTextField(
-            text = email,
+            text = viewModel.email,
             placeholder = "Email",
             label = "Email",
-            onValueChange = { email = it })
+            onValueChange = { viewModel.email = it })
         Spacer(modifier = Modifier.height(10.dp))
         CustomTextField(
-            text = password,
+            text = viewModel.password,
             placeholder = "Password",
             isPassword = true,
-            onValueChange = { password = it },
+            onValueChange = { viewModel.password = it },
             trailingIcon = Icons.Filled.Visibility,
             label = "Password",
             showPassword = showPassword,
@@ -95,8 +95,13 @@ fun LoginScreen(navController: NavController) {
         CustomButton(
             text = "Masuk",
             onClick = {
-                navController.popBackStack()
-                navController.navigate(Routes.HOME)
+
+                if (viewModel.email == "" || viewModel.password == "") {
+                    viewModel.handleBlank(context)
+                } else {
+                    viewModel.handleLogin(navController, context= context)
+
+                }
             }
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -132,9 +137,3 @@ fun LoginScreen(navController: NavController) {
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun ShowLoginScreen() {
-//    LoginScreen()
-//}
