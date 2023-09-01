@@ -30,6 +30,7 @@ fun CircularButton(
         Modifier
             .background(color = color, shape = CircleShape)
             .size(48.dp)
+            .clip(CircleShape)
             .clickable {
                 onClick()
             },

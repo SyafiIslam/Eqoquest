@@ -216,8 +216,19 @@ fun HomeScreen(navController: NavController, ) {
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun Design() {
-//    Home()
+fun Home() {
+
+    val scroll = rememberScrollState()
+
+    LazyColumn(
+        Modifier
+            .fillMaxSize()
+            .padding(30.dp)
+            .scrollable(scroll, Orientation.Vertical)
+    ) {
+        item {
+
+        }
+    }
 }

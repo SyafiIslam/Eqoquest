@@ -27,7 +27,9 @@ fun CustomTextField(
     onValueChange: (String) -> Unit = {},
     onPasswordToggle: (Boolean) -> Unit = {},
     label: String? = null,
-    isPassword: Boolean = false
+    isPassword: Boolean = false,
+    maxLine: Int= 1,
+    minLine: Int= 1
 ) {
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
@@ -78,6 +80,8 @@ fun CustomTextField(
         },
         keyboardOptions =
         if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password)
-        else KeyboardOptions(keyboardType = KeyboardType.Text)
+        else KeyboardOptions(keyboardType = KeyboardType.Text),
+        maxLines = maxLine,
+        minLines = minLine
     )
 }
