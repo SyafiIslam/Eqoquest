@@ -23,6 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.syafi.ecoquest.R
 import com.syafi.ecoquest.data.misiList
 import com.syafi.ecoquest.model.Misi
@@ -32,10 +34,11 @@ import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.ui.theme.grey
 
 @Composable
-fun HomeScreen(
-    navController: NavController,
-) {
+fun HomeScreen(navController: NavController, ) {
     val scrollState = rememberScrollState()
+
+    val db = Firebase.firestore
+
     Column(
         modifier = Modifier
             .fillMaxSize()

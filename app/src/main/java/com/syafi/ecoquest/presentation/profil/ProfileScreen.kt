@@ -39,59 +39,75 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun ProfileScreen(navController: NavController) {
-    Box {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(vertical = 30.dp, horizontal = 15.dp),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Card(
-                elevation = 10.dp,
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(vertical = 30.dp, horizontal = 15.dp)
+    ) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+            AsyncImage(
+                model = R.drawable.logout,
+                contentDescription = "logout",
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 20.dp, horizontal = 10.dp),
-                backgroundColor = MaterialTheme.colors.cream,
-                shape = RoundedCornerShape(15.dp)
+                    .size(31.dp)
+                    .clickable {
+
+                    }
+            )
+        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Box {
+            Column(
+                Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Column(
+                Card(
+                    elevation = 10.dp,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .padding(vertical = 20.dp, horizontal = 10.dp),
+                    backgroundColor = MaterialTheme.colors.cream,
+                    shape = RoundedCornerShape(15.dp)
                 ) {
-                    Spacer(modifier = Modifier.height(65.dp))
-                    Text(text = "Bambang", style = MaterialTheme.typography.h5)
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = "bambangganteng.gmail.com",
-                        color = MaterialTheme.colors.sage,
-                        style = MaterialTheme.typography.subtitle1
-                    )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = "Edit",
-                        textDecoration = TextDecoration.Underline,
-                        style = MaterialTheme.typography.subtitle2,
-                        modifier = Modifier.clickable {
-                            navController.navigate(Routes.EDIT_PROFIL)
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(20.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Spacer(modifier = Modifier.height(75.dp))
+                        Text(text = "Bambang", style = MaterialTheme.typography.h5)
+                        Text(
+                            text = "bambangganteng.gmail.com",
+                            color = MaterialTheme.colors.sage,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Text(
+                            text = "Edit",
+                            textDecoration = TextDecoration.Underline,
+                            style = MaterialTheme.typography.subtitle2,
+                            modifier = Modifier.clickable {
+                                navController.navigate(Routes.EDIT_PROFIL)
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Experience()
+                        Spacer(modifier = Modifier.height(10.dp))
+                        completedList.forEach {
+                            CompletedItem(completedData = it)
                         }
-                    )
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Experience()
-                    Spacer(modifier = Modifier.height(10.dp))
-                    completedList.forEach { 
-                        CompletedItem(completedData = it)
                     }
                 }
             }
+            ProfilePicture(
+                level = 3,
+                image = R.drawable.profile_picture,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+            )
         }
-        ProfilePicture(
-            level = 3,
-            image = R.drawable.profile_picture,
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-        )
     }
 }

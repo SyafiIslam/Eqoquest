@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.syafi.ecoquest.presentation.add_postingan.AddPost
 import com.syafi.ecoquest.presentation.challenge.ChallengeScreen
 import com.syafi.ecoquest.presentation.edit_profil.EditProfilScreen
 import com.syafi.ecoquest.presentation.hadiah.RewardScreen
@@ -56,6 +57,9 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
         }
         composable(Routes.EDIT_PROFIL) {
             EditProfilScreen(navController)
+        }
+        composable(Routes.ADD_POSTINGAN) {
+            AddPost(navController)
         }
     }
 }
