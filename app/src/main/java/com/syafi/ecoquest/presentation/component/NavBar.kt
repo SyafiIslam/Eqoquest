@@ -21,11 +21,14 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun NavBar(
-    navController: NavController, bottomNavItem: List<NavBar> = listOf(
+    navController: NavController,
+) {
+
+    val bottomNavItem: List<NavBar> = listOf(
         NavBar(
             title = "Beranda",
             icon = painterResource(id = R.drawable.icon_home),
-            route = Routes.HOME
+            route = Routes.HOME + "?email=fajri@gmail.com"
         ),
         NavBar(
             title = "Peringkat",
@@ -48,7 +51,6 @@ fun NavBar(
             route = Routes.PROFIL
         )
     )
-) {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 

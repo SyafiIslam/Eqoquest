@@ -236,8 +236,91 @@ fun HomeScreen(navController: NavController, email: String) {
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Left
         )
+    }
+}
 
+@Composable
+fun HomeScreen(navController: NavController) {
 
+    var nama by remember {
+        mutableStateOf("")
+    }
+
+    val scrollState = rememberScrollState()
+
+    val db = Firebase.firestore
+
+    val context= LocalContext.current
+
+    val docRef= db.collection(email).document("user_data")
+    docRef.get()
+        .addOnSuccessListener {  doc ->
+            if (doc != null) {
+                Log.d("tesemail", "${doc.data!!["fullName"]}")
+                nama= doc.data!!["fullName"].toString()
+            } else {
+                Log.d("tesemail", "No such document")
+            }
+        }
+        .addOnFailureListener {
+            Toast.makeText(context, "gk dapt", Toast.LENGTH_SHORT).show()
+        }
+
+    LazyColumn(
+        Modifier
+            .fillMaxSize()
+            .padding(30.dp)
+            .scrollable(scroll, Orientation.Vertical),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        item {
+            GreetUser()
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+        item {
+            ProgressUser()
+        }
+        item {
+            Spacer(modifier = Modifier.height(30.dp))
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = "Misi",
+                style = MaterialTheme.typography.h4,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Left
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+        }
+        items(misiList.size) {
+            MisiItem(misi = misiList[it], index = it, navController = navController)
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(30.dp))
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = "Rutinitas",
+                style = MaterialTheme.typography.h4,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Left
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+        }
+
+        items(rutinitasList.size) {
+            RutinitasItem(navController = navController, rutinitas = rutinitasList[it], index = it)
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(20.dp))
+        }
     }
 }
 

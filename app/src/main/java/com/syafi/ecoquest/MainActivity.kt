@@ -13,6 +13,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -61,9 +63,13 @@ class MainActivity : ComponentActivity() {
                     val navController= rememberNavController()
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
+                    var route by remember {
+                        mutableStateOf("")
+                    }
+
                     CustomScaffold(
                         navController = navController,
-                        showBottomBar = navBackStackEntry?.destination?.route in showBottomBarList,
+                        showBottomBar = checkRoute(route),
                         showFab = navBackStackEntry?.destination?.route in showFabList,
                         onFabClick = {
                             when(navBackStackEntry?.destination?.route) {
@@ -76,30 +82,27 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     ) {
+                        if( navBackStackEntry?.destination?.route != null) {
+                            route= navBackStackEntry?.destination?.route!!
+                        } else {
+                            route= Routes.SPLASH
+                        }
                         Navigation(navController = navController, screen)
                     }
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String) {
-    Text(
-        text = "Hello $name!",
-        style = MaterialTheme.typography.h1,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(6.dp),
-        color = MaterialTheme.colors.sage
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    EcoQuestTheme {
-        Greeting("Android")
+    fun checkRoute(route: String): Boolean {
+        var cond= false
+        var temp= false
+        showBottomBarList.forEach {
+            temp= route.contains(it)
+            if (temp) {
+                cond= temp
+            }
+        }
+        return cond
     }
 }

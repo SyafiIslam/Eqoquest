@@ -5,11 +5,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import com.syafi.ecoquest.R
 import androidx.compose.ui.res.painterResource
-import com.syafi.ecoquest.model.Completed
-import com.syafi.ecoquest.model.Komunitas
-
-import com.syafi.ecoquest.model.Misi
-import com.syafi.ecoquest.model.NavBar
+import com.syafi.ecoquest.model.*
 
 val misiList = listOf<Misi>(
     Misi(
@@ -85,3 +81,42 @@ val komunitasList = listOf<Komunitas>(
         false
     )
 )
+
+val peringkatList = listOf<Peringkat>(
+    Peringkat(
+        R.drawable.profile_picture_3,
+        "Azizi",
+        10,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture_4,
+        "Speed",
+        9239,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture,
+        "Bambang",
+        150,
+        true
+    ),
+    Peringkat(
+        R.drawable.profile_picture_6,
+        "Ronaldo",
+        151,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture_5,
+        "Margot R.",
+        9238,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture_2,
+        "Windah",
+        149,
+        false
+    )
+).sortedByDescending { it.exp }
