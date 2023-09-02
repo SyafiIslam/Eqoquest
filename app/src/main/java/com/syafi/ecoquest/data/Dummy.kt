@@ -5,11 +5,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import com.syafi.ecoquest.R
 import androidx.compose.ui.res.painterResource
-import com.syafi.ecoquest.model.Completed
-import com.syafi.ecoquest.model.Komunitas
-
-import com.syafi.ecoquest.model.Misi
-import com.syafi.ecoquest.model.NavBar
+import com.syafi.ecoquest.model.*
 
 val misiList = listOf<Misi>(
     Misi(
@@ -84,4 +80,9 @@ val komunitasList = listOf<Komunitas>(
         "Misi baru! Memperingati hari bumi, Ecoquest mengajak kalian untuk membersihkan pantai Kuta bersama Pandawara 5",
         false
     )
+)
+
+val rutinitasList= listOf<Rutinitas>(
+    Rutinitas("Memilah Sampah",  false),
+    Rutinitas("Hemat Energi",  false)
 )

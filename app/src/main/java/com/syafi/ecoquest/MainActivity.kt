@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var splashViewModel: SplashViewModel
 
-    val showBottomBarList= listOf<String>(
+    val showBottomBarList = listOf<String>(
         Routes.HOME,
         Routes.PERINGKAT,
         Routes.KOMUNITAS,
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
         Routes.PROFIL,
     )
 
-    val showFabList= listOf<String>(
+    val showFabList = listOf<String>(
         Routes.HOME,
         Routes.KOMUNITAS,
     )
@@ -58,25 +58,27 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val screen = splashViewModel._startDestination
-                    val navController= rememberNavController()
+                    val navController = rememberNavController()
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
-                    CustomScaffold(
-                        navController = navController,
-                        showBottomBar = navBackStackEntry?.destination?.route in showBottomBarList,
-                        showFab = navBackStackEntry?.destination?.route in showFabList,
-                        onFabClick = {
-                            when(navBackStackEntry?.destination?.route) {
-                                Routes.HOME -> {
-                                    navController.navigate(Routes.TAMBAH_RUTINITAS)
-                                }
-                                Routes.KOMUNITAS -> {
-                                    navController.navigate(Routes.ADD_POSTINGAN)
+                    navBackStackEntry?.destination?.route?.let {
+                        CustomScaffold(
+                            navController = navController,
+                            showBottomBar = it.contains(Routes.HOME),
+                            showFab = navBackStackEntry?.destination?.route in showFabList,
+                            onFabClick = {
+                                when (navBackStackEntry?.destination?.route) {
+                                    Routes.HOME -> {
+                                        navController.navigate(Routes.TAMBAH_RUTINITAS)
+                                    }
+                                    Routes.KOMUNITAS -> {
+                                        navController.navigate(Routes.ADD_POSTINGAN)
+                                    }
                                 }
                             }
+                        ) {
+                            Navigation(navController = navController, screen)
                         }
-                    ) {
-                        Navigation(navController = navController, screen)
                     }
                 }
             }
