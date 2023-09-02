@@ -17,7 +17,7 @@ val misiList = listOf<Misi>(
     Misi(
         "Daur ulang botol",
         30,
-        1f,
+        0.9f,
         1
     ),
     Misi(

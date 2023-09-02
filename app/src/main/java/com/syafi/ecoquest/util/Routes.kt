@@ -11,8 +11,8 @@ object Routes {
     const val KOMUNITAS= "komunitas"
     const val HADIAH= "hadiah"
     const val PROFIL= "profil"
-    const val TAMBAH_RUTINITAS= "tambah_rutinitas"
-    const val EDIT_PROFIL= "edit_profil"
+    const val TAMBAH_RUTINITAS= "tambah_habbit"
+    const val EDIT_PROFIL= "edit_data"
     const val ADD_POSTINGAN= "add_post"
-    const val EDIT_RUTINITAS= "edit_rutinitas"
+    const val EDIT_RUTINITAS= "habbit"
 }
