@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.syafi.ecoquest.presentation.add_postingan.AddPost
 import com.syafi.ecoquest.presentation.challenge.ChallengeScreen
 import com.syafi.ecoquest.presentation.edit_profil.EditProfilScreen
+import com.syafi.ecoquest.presentation.edit_rutinitas.EditRutinitas
 import com.syafi.ecoquest.presentation.hadiah.RewardScreen
 import com.syafi.ecoquest.presentation.home.HomeScreen
 import com.syafi.ecoquest.presentation.komunitas.CommunityScreen
@@ -36,9 +37,7 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
         composable(Routes.REGISTER) {
             RegisterScreen(navController = navController)
         }
-        composable(Routes.HOME) {
-            HomeScreen(navController = navController, email = "")
-        }
+
         composable(
             Routes.HOME + "?email={email}",
             arguments = listOf(
@@ -84,6 +83,9 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
         }
         composable(Routes.TAMBAH_RUTINITAS) {
             AddRutinitasScreen(navController)
+        }
+        composable(Routes.EDIT_RUTINITAS) {
+            EditRutinitas(navController = navController)
         }
         composable(Routes.EDIT_PROFIL) {
             EditProfilScreen(navController)

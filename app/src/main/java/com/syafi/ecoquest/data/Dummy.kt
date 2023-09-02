@@ -120,3 +120,8 @@ val peringkatList = listOf<Peringkat>(
         false
     )
 ).sortedByDescending { it.exp }
+
+val rutinitasList= listOf<Rutinitas>(
+    Rutinitas("Memilah Sampah",  false),
+    Rutinitas("Hemat Energi",  false)
+)

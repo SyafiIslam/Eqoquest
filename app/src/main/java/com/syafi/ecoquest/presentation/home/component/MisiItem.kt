@@ -94,10 +94,3 @@ fun MisiItem(misi: Misi, index: Int, navController: NavController, email: String
         }
     }
 }
-
-//@Preview (showBackground = true)
-//@Composable
-//fun Design() {
-//    val misi = misiList[0]
-//    MisiItem(misi, 0, navController)
-//}
