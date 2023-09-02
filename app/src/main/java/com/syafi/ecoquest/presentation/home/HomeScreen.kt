@@ -36,7 +36,7 @@ import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.ui.theme.grey
 
 @Composable
-fun HomeScreen(navController: NavController, email: String) {
+fun HomeScreen(navController: NavController) {
 
     val scroll = rememberScrollState()
 

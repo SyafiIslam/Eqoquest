@@ -2,14 +2,11 @@ package com.syafi.ecoquest.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.syafi.ecoquest.presentation.add_postingan.AddPost
 import com.syafi.ecoquest.presentation.challenge.ChallengeScreen
 import com.syafi.ecoquest.presentation.edit_profil.EditProfilScreen
-import com.syafi.ecoquest.presentation.edit_rutinitas.EditRutinitas
 import com.syafi.ecoquest.presentation.hadiah.RewardScreen
 import com.syafi.ecoquest.presentation.home.HomeScreen
 import com.syafi.ecoquest.presentation.komunitas.CommunityScreen
@@ -37,18 +34,11 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
         composable(Routes.REGISTER) {
             RegisterScreen(navController = navController)
         }
-        composable(
-            Routes.HOME + "?email={email}",
-            arguments = listOf(
-                navArgument(name = "email") {
-                    type = NavType.StringType
-                }
-            )
-        ) {
-            val email= it.arguments?.getString("email")
-            email?.let {
-                HomeScreen(navController = navController, email = email)
-            }
+        composable(Routes.HOME) {
+            HomeScreen(navController)
+        }
+        composable(Routes.CHALLENGE) {
+            ChallengeScreen(navController)
         }
         composable(Routes.PERINGKAT) {
             LeaderBoardScreen()

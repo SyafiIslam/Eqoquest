@@ -5,7 +5,7 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
 
-        <!-- Untuk menghilangkan splash screen default -->
-        <item name="android:windowIsTranslucent">true</item>
+<!--        &lt;!&ndash; Untuk menghilangkan splash screen default &ndash;&gt;-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
     </style>
 </resources>
