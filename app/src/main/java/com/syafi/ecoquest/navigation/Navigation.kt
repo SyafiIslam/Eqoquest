@@ -37,9 +37,6 @@ fun Navigation(navController: NavHostController, afterSplashDestination: String)
         composable(Routes.REGISTER) {
             RegisterScreen(navController = navController)
         }
-        composable(Routes.HOME) {
-            HomeScreen(navController)
-        }
         composable(
             Routes.HOME + "?email={email}",
             arguments = listOf(
