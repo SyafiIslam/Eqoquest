@@ -21,7 +21,7 @@ import com.syafi.ecoquest.ui.theme.sage
 import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun ChallengeScreen(navController: NavController) {
+fun ChallengeScreen(navController: NavController, email: String, id: Int) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -36,8 +36,7 @@ fun ChallengeScreen(navController: NavController) {
             ) {
                 CircularButton(
                     onClick = {
-                        navController.popBackStack()
-                        navController.navigate(Routes.HOME)
+                        navController.navigate(Routes.HOME + "?email=${email}")
                     },
                     icon = Icons.Default.ArrowBack
                 )

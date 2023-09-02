@@ -77,9 +77,8 @@ fun ProfileScreen(navController: NavController) {
                             .padding(20.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Spacer(modifier = Modifier.height(65.dp))
+                        Spacer(modifier = Modifier.height(75.dp))
                         Text(text = "Bambang", style = MaterialTheme.typography.h5)
-                        Spacer(modifier = Modifier.height(5.dp))
                         Text(
                             text = "bambangganteng.gmail.com",
                             color = MaterialTheme.colors.sage,

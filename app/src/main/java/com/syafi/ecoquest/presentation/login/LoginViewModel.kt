@@ -17,8 +17,6 @@ class LoginViewModel() : ViewModel() {
 
     var password by mutableStateOf("")
 
-
-
     fun handleBlank(context: Context) {
         Toast.makeText(
             context,
@@ -34,7 +32,7 @@ class LoginViewModel() : ViewModel() {
                     val user = auth.currentUser
                     if (user != null) {
                         navController.popBackStack()
-                        navController.navigate(Routes.HOME)
+                        navController.navigate(Routes.HOME + "?email=${email}")
                     }
                 }
             }
