@@ -16,7 +16,7 @@ import com.syafi.ecoquest.R
 import com.syafi.ecoquest.ui.theme.green
 
 @Composable
-fun GreetUser() {
+fun GreetUser(nama: String) {
     Row(
         Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -29,7 +29,7 @@ fun GreetUser() {
                 fontWeight = FontWeight.SemiBold
             )
             Text(
-                text = "Bambang",
+                text = "${nama}",
                 style = MaterialTheme.typography.h5,
                 color = MaterialTheme.colors.green,
                 fontWeight = FontWeight.SemiBold

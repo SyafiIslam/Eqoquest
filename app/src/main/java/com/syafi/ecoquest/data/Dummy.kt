@@ -82,6 +82,45 @@ val komunitasList = listOf<Komunitas>(
     )
 )
 
+val peringkatList = listOf<Peringkat>(
+    Peringkat(
+        R.drawable.profile_picture_3,
+        "Azizi",
+        10,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture_4,
+        "Speed",
+        9239,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture,
+        "Bambang",
+        150,
+        true
+    ),
+    Peringkat(
+        R.drawable.profile_picture_6,
+        "Ronaldo",
+        151,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture_5,
+        "Margot R.",
+        9238,
+        false
+    ),
+    Peringkat(
+        R.drawable.profile_picture_2,
+        "Windah",
+        149,
+        false
+    )
+).sortedByDescending { it.exp }
+
 val rutinitasList= listOf<Rutinitas>(
     Rutinitas("Memilah Sampah",  false),
     Rutinitas("Hemat Energi",  false)

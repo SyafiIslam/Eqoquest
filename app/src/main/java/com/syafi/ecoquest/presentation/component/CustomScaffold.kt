@@ -20,12 +20,13 @@ fun CustomScaffold(
     showFab: Boolean = false,
     navController: NavController,
     onFabClick: () -> Unit = {},
+    email: String,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
         bottomBar = {
             if (showBottomBar) {
-                NavBar(navController = navController)
+                NavBar(navController = navController, email)
             }
         },
         content = content,

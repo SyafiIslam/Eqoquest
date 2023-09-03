@@ -6,6 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -21,7 +22,7 @@ import com.syafi.ecoquest.ui.theme.sage
 import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun ChallengeScreen(navController: NavController) {
+fun ChallengeScreen(navController: NavController, email: MutableState<String>) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -36,7 +37,7 @@ fun ChallengeScreen(navController: NavController) {
             ) {
                 CircularButton(
                     onClick = {
-                        navController.navigate(Routes.HOME)
+                        navController.navigate(Routes.HOME + "?email=${email.value}")
                     },
                     icon = Icons.Default.ArrowBack
                 )
@@ -124,7 +125,7 @@ fun ChallengeScreen(navController: NavController) {
                 text = "Mulai",
                 onClick = {
                     navController.popBackStack()
-                    navController.navigate(Routes.HOME)
+                    navController.navigate(Routes.HOME + "?email=${email.value}")
                 }
             )
         }

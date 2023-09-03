@@ -22,21 +22,24 @@ import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun AddRutinitasDialog(dialog: MutableState<Boolean>, navController: NavController) {
-    Dialog(onDismissRequest = { dialog.value = false }) {
+fun AddRutinitasDialog(dialog: MutableState<Boolean>, navController: NavController, email: String) {
+    Dialog(onDismissRequest = {
+        navController.navigate(Routes.HOME + "?email=${email}")
+        dialog.value = false
+    }) {
         Surface(
             modifier = Modifier
                 .width(319.dp)
                 .height(133.dp),
             shape = RoundedCornerShape(10.dp)
         ) {
-            DialogUi(navController = navController)
+            DialogUi(navController = navController, email)
         }
     }
 }
 
 @Composable
-fun DialogUi(navController: NavController) {
+fun DialogUi(navController: NavController, email: String) {
     Column(
         Modifier
             .wrapContentWidth()
@@ -50,7 +53,7 @@ fun DialogUi(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Berhasil ditambahkan",
+            text = "Berhasil",
             color = MaterialTheme.colors.dark,
             style = MaterialTheme.typography.h4
         )
@@ -61,7 +64,7 @@ fun DialogUi(navController: NavController) {
             fontSize = 14.sp,
             modifier = Modifier.clickable {
                 navController.popBackStack()
-                navController.navigate(Routes.HOME)
+                navController.navigate(Routes.HOME + "?email=${email}")
             }
         )
     }

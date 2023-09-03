@@ -13,6 +13,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +37,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var splashViewModel: SplashViewModel
 
-    val showBottomBarList = listOf<String>(
+    val showBottomBarList= listOf<String>(
         Routes.HOME,
         Routes.PERINGKAT,
         Routes.KOMUNITAS,
@@ -43,7 +45,7 @@ class MainActivity : ComponentActivity() {
         Routes.PROFIL,
     )
 
-    val showFabList = listOf<String>(
+    val showFabList= listOf<String>(
         Routes.HOME,
         Routes.KOMUNITAS,
     )
@@ -58,50 +60,51 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val screen = splashViewModel._startDestination
-                    val navController = rememberNavController()
+                    val navController= rememberNavController()
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
-                    navBackStackEntry?.destination?.route?.let {
-                        CustomScaffold(
-                            navController = navController,
-                            showBottomBar = it.contains(Routes.HOME),
-                            showFab = navBackStackEntry?.destination?.route in showFabList,
-                            onFabClick = {
-                                when (navBackStackEntry?.destination?.route) {
-                                    Routes.HOME -> {
-                                        navController.navigate(Routes.TAMBAH_RUTINITAS)
-                                    }
-                                    Routes.KOMUNITAS -> {
-                                        navController.navigate(Routes.ADD_POSTINGAN)
-                                    }
-                                }
+                    var route by remember {
+                        mutableStateOf("")
+                    }
+
+                    var email = remember {
+                        mutableStateOf("")
+                    }
+
+                    CustomScaffold(
+                        navController = navController,
+                        showBottomBar = checkRoute(route, showBottomBarList),
+                        showFab = checkRoute(route, showFabList),
+                        onFabClick = {
+                            if (route.contains(Routes.HOME)) {
+                                navController.navigate(Routes.TAMBAH_RUTINITAS)
+                            } else {
+                                navController.navigate(Routes.ADD_POSTINGAN)
                             }
-                        ) {
-                            Navigation(navController = navController, screen)
+                        },
+                        email = email.value
+                    ) {
+                        if( navBackStackEntry?.destination?.route != null) {
+                            route= navBackStackEntry?.destination?.route!!
+                        } else {
+                            route= Routes.SPLASH
                         }
+                        Navigation(navController = navController, screen, email)
                     }
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String) {
-    Text(
-        text = "Hello $name!",
-        style = MaterialTheme.typography.h1,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(6.dp),
-        color = MaterialTheme.colors.sage
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    EcoQuestTheme {
-        Greeting("Android")
+    fun checkRoute(route: String, list: List<String>): Boolean {
+        var cond= false
+        var temp= false
+        list.forEach {
+            temp= route.contains(it)
+            if (temp) {
+                cond= temp
+            }
+        }
+        return cond
     }
 }

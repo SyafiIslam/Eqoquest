@@ -1,5 +1,6 @@
 package com.syafi.ecoquest.presentation.tambah_rutinitas
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
@@ -9,6 +10,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -22,7 +24,9 @@ import com.syafi.ecoquest.ui.theme.dark
 import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun AddRutinitasScreen(navController: NavController) {
+fun AddRutinitasScreen(navController: NavController, email: String) {
+
+    val context = LocalContext.current
 
     var rutinitas by remember {
         mutableStateOf("")
@@ -52,7 +56,7 @@ fun AddRutinitasScreen(navController: NavController) {
                 CircularButton(
                     onClick = {
                         navController.popBackStack()
-                        navController.navigate(Routes.HOME)
+                        navController.navigate(Routes.HOME + "?email+${email}")
                     },
                     icon = Icons.Default.ArrowBack
                 )
@@ -91,10 +95,16 @@ fun AddRutinitasScreen(navController: NavController) {
                 Switch(checked = isSwithOn, onCheckedChange = { isSwithOn = it })
             }
         }
-        CustomButton(text = "Simpan", onClick = { openDialog.value = true })
+        CustomButton(text = "Simpan", onClick = {
+            if (rutinitas == "") {
+                Toast.makeText(context, "Tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
+            } else {
+                openDialog.value = true
+            }
+        })
 
         if (openDialog.value) {
-            AddRutinitasDialog(dialog = openDialog, navController)
+            AddRutinitasDialog(dialog = openDialog, navController, email)
         }
     }
 }

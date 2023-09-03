@@ -34,7 +34,6 @@ fun DropdownRutinitas(navController: NavController, openDropdown: MutableState<B
                 onClick = {
                     if (it.action === "Edit") {
                         openDropdown.value= false
-                        navController.navigate("")
                     } else {
                         openDropdown.value= false
                     }

@@ -3,8 +3,7 @@ package com.syafi.ecoquest.presentation.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,36 +20,56 @@ import com.syafi.ecoquest.util.Routes
 
 @Composable
 fun NavBar(
-    navController: NavController, bottomNavItem: List<NavBar> = listOf(
+    navController: NavController, email: String
+) {
+
+    val bottomNavItem: List<NavBar> = listOf(
         NavBar(
             title = "Beranda",
             icon = painterResource(id = R.drawable.icon_home),
-            route = Routes.HOME
+            route = Routes.HOME + "?email=${email}",
+            rootRoute = Routes.HOME
         ),
         NavBar(
             title = "Peringkat",
             icon = painterResource(id = R.drawable.icon_leaderboard),
-            route = Routes.PERINGKAT
+            route = Routes.PERINGKAT,
+            rootRoute = Routes.PERINGKAT
+
         ),
         NavBar(
             title = "Komunitas",
             icon = painterResource(id = R.drawable.icon_komunitas),
-            route = Routes.KOMUNITAS
+            route = Routes.KOMUNITAS,
+            rootRoute = Routes.KOMUNITAS
+
         ),
         NavBar(
             title = "Hadiah",
             icon = painterResource(id = R.drawable.icon_reward),
-            route = Routes.HADIAH
+            route = Routes.HADIAH,
+            rootRoute = Routes.HADIAH
+
         ),
         NavBar(
             title = "Profil",
             icon = painterResource(id = R.drawable.icon_profile),
-            route = Routes.PROFIL
+            route = Routes.PROFIL,
+            rootRoute = Routes.PROFIL
+
         )
     )
-) {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
+    var route by remember {
+        mutableStateOf("")
+    }
+
+    if( navBackStackEntry?.destination?.route != null) {
+        route= navBackStackEntry?.destination?.route!!
+    } else {
+        route= Routes.SPLASH
+    }
 
     Card(
         modifier = Modifier
@@ -60,7 +79,7 @@ fun NavBar(
         BottomNavigation() {
             bottomNavItem.forEach {
                 BottomNavigationItem(
-                    selected = navBackStackEntry?.destination?.route == it.route,
+                    selected = navBackStackEntry?.destination?.route == it.rootRoute,
                     onClick = { navController.navigate(it.route) },
                     icon = {
                         Column(
@@ -74,7 +93,7 @@ fun NavBar(
                                 painter = it.icon,
                                 contentDescription = it.title,
                                 tint =
-                                if (navBackStackEntry?.destination?.route == it.route)
+                                if (route.contains(it.rootRoute))
                                     MaterialTheme.colors.dark
                                 else
                                     MaterialTheme.colors.sage

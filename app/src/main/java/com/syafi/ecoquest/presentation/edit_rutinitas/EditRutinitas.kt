@@ -72,8 +72,8 @@ fun EditRutinitas(navController: NavController) {
         }
         CustomButton(text = "Simpan", onClick = { openDialog.value = true })
 
-        if (openDialog.value) {
-            AddRutinitasDialog(dialog = openDialog, navController)
-        }
+//        if (openDialog.value) {
+//            Ed(dialog = openDialog, navController)
+//        }
     }
 }

@@ -30,7 +30,7 @@ import com.syafi.ecoquest.ui.theme.sage
 import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun MisiItem(misi: Misi, index: Int, navController: NavController) {
+fun MisiItem(misi: Misi, index: Int, navController: NavController, email: String) {
     var id by remember {
         mutableStateOf(index)
     }
@@ -40,6 +40,7 @@ fun MisiItem(misi: Misi, index: Int, navController: NavController) {
             .fillMaxWidth()
             .padding(bottom = 10.dp)
             .clickable {
+                navController.popBackStack()
                 navController.navigate(Routes.CHALLENGE)
             },
         elevation = 3.dp,

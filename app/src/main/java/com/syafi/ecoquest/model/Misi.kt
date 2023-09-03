@@ -6,4 +6,3 @@ data class Misi(
     val progress: Float,
     val timer: Int
 )
-

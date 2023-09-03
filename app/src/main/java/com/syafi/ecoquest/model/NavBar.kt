@@ -8,5 +8,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 data class NavBar(
     val title: String,
     val icon: Painter,
-    val route: String
+    val route: String,
+    val rootRoute: String
 )

@@ -43,7 +43,7 @@ fun ProgressUser() {
                                 .size(80.dp)
                                 .width(20.dp),
                             color = MaterialTheme.colors.green,
-                            progress = 0.5f,
+                            progress = 0.75f,
                             strokeWidth = 5.dp,
                         )
                         Text(
