@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.syafi.ecoquest.model.DropDownData
+import com.syafi.ecoquest.util.Routes
 
 @Composable
 
@@ -34,6 +35,7 @@ fun DropdownRutinitas(navController: NavController, openDropdown: MutableState<B
                 onClick = {
                     if (it.action === "Edit") {
                         openDropdown.value= false
+                        navController.navigate(Routes.EDIT_RUTINITAS)
                     } else {
                         openDropdown.value= false
                     }

@@ -1,4 +1,4 @@
-package com.syafi.ecoquest.presentation.tambah_rutinitas.component
+package com.syafi.ecoquest.presentation.edit_rutinitas.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -22,7 +21,7 @@ import com.syafi.ecoquest.ui.theme.green
 import com.syafi.ecoquest.util.Routes
 
 @Composable
-fun AddRutinitasDialog(dialog: MutableState<Boolean>, navController: NavController, email: String) {
+fun EditDialog(dialog: MutableState<Boolean>, navController: NavController, email: String) {
     Dialog(onDismissRequest = {
         navController.navigate(Routes.HOME + "?email=${email}")
         dialog.value = false
@@ -53,7 +52,7 @@ fun DialogUi(navController: NavController, email: String) {
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Berhasil di simpan",
+            text = "Berhasil di ubah",
             color = MaterialTheme.colors.dark,
             style = MaterialTheme.typography.h4
         )

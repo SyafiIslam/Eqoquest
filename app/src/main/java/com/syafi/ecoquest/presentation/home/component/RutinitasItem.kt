@@ -39,7 +39,6 @@ fun RutinitasItem(navController: NavController, rutinitas: Rutinitas, index: Int
             .fillMaxWidth()
             .padding(bottom = 10.dp)
             .clickable {
-                navController.navigate(Routes.CHALLENGE)
             },
         elevation = 3.dp,
         backgroundColor =

@@ -76,7 +76,7 @@ fun Navigation(
             AddRutinitasScreen(navController, _email.value)
         }
         composable(Routes.EDIT_RUTINITAS) {
-            EditRutinitas(navController = navController)
+            EditRutinitas(navController = navController, _email.value)
         }
         composable(Routes.EDIT_PROFIL) {
             EditProfilScreen(navController)

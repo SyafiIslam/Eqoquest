@@ -102,7 +102,11 @@ fun EditProfilScreen(navController: NavController) {
             text = "Simpan",
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter)
+                .align(Alignment.BottomCenter),
+            onClick = {
+                navController.popBackStack()
+                navController.navigate(Routes.PROFIL)
+            }
         )
     }
 }

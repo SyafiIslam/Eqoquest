@@ -51,7 +51,7 @@ fun AddPost(navController: NavController) {
             }
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = "Tambah Rutinitas",
+                text = "Buat Postingan",
                 style = MaterialTheme.typography.h3,
                 color = MaterialTheme.colors.dark
             )

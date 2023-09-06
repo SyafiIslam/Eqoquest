@@ -56,7 +56,7 @@ fun AddRutinitasScreen(navController: NavController, email: String) {
                 CircularButton(
                     onClick = {
                         navController.popBackStack()
-                        navController.navigate(Routes.HOME + "?email+${email}")
+                        navController.navigate(Routes.HOME + "?email=${email}")
                     },
                     icon = Icons.Default.ArrowBack
                 )

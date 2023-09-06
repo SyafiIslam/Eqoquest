@@ -54,6 +54,7 @@ fun ProfileScreen(navController: NavController) {
                     .size(31.dp)
                     .clickable {
                         Firebase.auth.signOut()
+                        navController.popBackStack()
                         navController.navigate(Routes.LOGIN)
                     }
             )
@@ -83,7 +84,7 @@ fun ProfileScreen(navController: NavController) {
                         Spacer(modifier = Modifier.height(75.dp))
                         Text(text = "Bambang", style = MaterialTheme.typography.h5)
                         Text(
-                            text = "bambangganteng.gmail.com",
+                            text = "bambangganteng@gmail.com",
                             color = MaterialTheme.colors.sage,
                             style = MaterialTheme.typography.subtitle1
                         )
