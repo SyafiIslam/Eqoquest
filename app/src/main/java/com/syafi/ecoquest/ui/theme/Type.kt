@@ -77,12 +77,12 @@ val RubikTypograpgy= Typography(
     ),
     subtitle1 = TextStyle(
         fontFamily = Rubik,
-        fontSize = 12.sp,
+        fontSize = 14.sp,
         fontWeight = FontWeight.Medium
     ),
     subtitle2 = TextStyle(
         fontFamily = Rubik,
-        fontSize = 11.sp,
+        fontSize = 12.sp,
         fontWeight = FontWeight.Medium
     ),
 )

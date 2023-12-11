@@ -12,6 +12,8 @@ val Cream= Color(0xFFEDF1D6)
 val Sage= Color(0xFF9DC08B)
 val Green= Color(0xFF609966)
 val Dark= Color(0xFF40513B)
+val Grey= Color(0xFFE4E7EC)
+val Abu= Color(0xFFB7B6B6)
 
 val Colors.cream
     get() = Cream
@@ -24,3 +26,9 @@ val Colors.green
 
 val Colors.dark
     get() = Dark
+
+val Colors.grey
+    get() = Grey
+
+val Colors.abu
+    get() = Abu
